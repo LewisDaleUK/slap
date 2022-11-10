@@ -1,7 +1,11 @@
 import { serve } from "https://deno.land/std@0.162.0/http/server.ts";
 
+import { renderToString } from "./deps.ts";
+
 import { handler as inbox } from "./routes/inbox.ts";
 import { handler as actor } from "./routes/actor.ts";
+
+import Index from "./views/index.tsx";
 
 type Handler = (req: Request, match: URLPatternResult) => Response | Promise<Response>;
 
@@ -10,7 +14,7 @@ const routes: [URLPattern, Handler][] = [
 	[new URLPattern({ pathname: "/:actor/inbox" }), inbox],
 	[new URLPattern({ pathname: "/:actor/output" }), () => new Response("Outbox")],
 	[new URLPattern({ pathname: "/(@)?:actor?:ext(\.json)?" }), actor],
-	[new URLPattern({ pathname: "/" }), () => new Response("Hello, welcome to S.L.A.P." )]
+	[new URLPattern({ pathname: "/" }), () => new Response( new TextEncoder().encode(renderToString(Index)) )]
 ];
 
 const handler = async (req: Request): Promise<Response> => {

@@ -1,11 +1,3 @@
-import { DB } from "https://deno.land/x/sqlite/mod.ts";
+import { DB } from "https://deno.land/x/sqlite@v3.7.0/mod.ts";
 
-export default class Database {
-	private readonly _database: DB;
-
-	constructor(dbname: string = ":memory:") {
-		this._database = new DB(dbname);
-
-		this._database.execute(`PRAGMA foreign_keys = ON`);
-	}
-}
+export type Database = DB;
