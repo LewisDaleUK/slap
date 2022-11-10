@@ -10,6 +10,16 @@ export default class SiteDetailsGateway implements IGateway<SiteDetails> {
 		this._database = database;
 	}
 
+	build(): void {
+		this._database.execute(`
+			CREATE TABLE site (
+				id INTEGER PRIMARY KEY,
+				domain TEXT NOT NULL,
+				title TEXT NOT NULL
+			);
+		`)
+	}
+
 	get(id: number): Maybe<SiteDetails> {
 		return this
 			._database

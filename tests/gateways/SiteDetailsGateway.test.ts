@@ -7,13 +7,7 @@ Deno.test("SiteDetailsGateway", async (t) => {
 	const gateway = new SiteDetailsGateway(database);
 
 	await t.step("Create table", () => {
-		database.execute(`
-			CREATE TABLE site (
-				id INTEGER PRIMARY KEY,
-				domain TEXT NOT NULL,
-				title TEXT NOT NULL
-			);
-		`)
+		gateway.build();
 	});
 
 	let siteId: number;
