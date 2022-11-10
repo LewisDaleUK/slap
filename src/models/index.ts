@@ -1,5 +1,5 @@
 export type SiteDetails = {
-	id: string;
+	id?: number;
 	domain: string;
 	title: string;
 }

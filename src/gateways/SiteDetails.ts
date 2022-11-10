@@ -10,7 +10,7 @@ export default class SiteDetailsGateway implements IGateway<SiteDetails> {
 		this._database = database;
 	}
 
-	get(id: string): Maybe<SiteDetails> {
+	get(id: number): Maybe<SiteDetails> {
 		return this
 			._database
 			.queryEntries<SiteDetails>(`SELECT * FROM site WHERE id = :id LIMIT 1`, { id })[0];
@@ -23,10 +23,18 @@ export default class SiteDetailsGateway implements IGateway<SiteDetails> {
 	}
 
 	save(item: SiteDetails): Maybe<string|number> {
-		throw new Error("Method not implemented.");
+		if (item.id) {
+			this._database.query("UPDATE site SET domain = :domain, title = :title WHERE id = :id", item);
+			return item.id;
+		} else {
+			this._database.query("INSERT INTO site (domain, title) VALUES (:domain, :title)", item);
+			return this._database.lastInsertRowId;
+		}
 	}
 
 	delete(item: SiteDetails): void {
-		throw new Error("Method not implemented.");
+		if (item.id) {
+			this._database.query("DELETE FROM site WHERE id = :id", { id: item.id });
+		}
 	}
 }
