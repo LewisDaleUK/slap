@@ -24,6 +24,10 @@ export default class ActorGateway implements IGateway<Actor> {
 	get(id: string|number): Maybe<Actor> {
 		return this._database.queryEntries<Actor>("SELECT * FROM actor WHERE id = ? LIMIT 1", [id])[0];
 	}
+
+	find(column: string, value: any): Maybe<Actor> {
+		return this._database.queryEntries<Actor>(`SELECT * FROM actor WHERE ${column} = ? LIMIT 1`, [value])[0];
+	}
 	
 	list(): Actor[] {
 		throw new Error("Method not implemented.");

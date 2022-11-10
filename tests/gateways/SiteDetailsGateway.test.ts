@@ -29,6 +29,13 @@ Deno.test("SiteDetailsGateway", async (t) => {
 		assertEquals(retrieved, { ...site, id: siteId });
 	});
 
+	await t.step("Get a site by domain", () => {
+		const retrieved = gateway.find("domain", site.domain);
+
+		assertExists(retrieved);
+		assertEquals(retrieved, { ...site, id: siteId });
+	});
+	
 	await t.step("Update a site", () => {
 		const updated = {
 			id: siteId,

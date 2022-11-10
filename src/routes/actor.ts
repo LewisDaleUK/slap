@@ -1,27 +1,38 @@
-import SiteDetailsGateway from "../gateways/SiteDetails.ts";
+import { VNode } from "https://esm.sh/v96/preact@10.11.2/src/index.d.ts";
+import ActorGateway from "../gateways/Actor.ts";
+
+import Profile from '../views/profile.tsx';
 
 export const handler = (req: Request, matches: URLPatternResult) : Response => {
-	const domain = req.headers.get("host");
-	const actor = matches.pathname.groups.actor;
+	const site = req.site;
+	const actor = new ActorGateway(req.database).find("handle", matches.pathname.groups.actor);
 
-	const site = new SiteDetailsGateway(req.database).get(1);
-	
-	if (!site) {
+	if (!actor) {
 		return new Response("Not found", { status: 404 });
 	}
 
+	const actorUri = `https://${site.domain}/${actor.handle}`;
+
+	const ext = matches.pathname.groups.ext;
+
+	if (ext !== ".json") {	
+		return new Response(
+			new TextEncoder().encode(Profile(actor))
+		);
+	}
+			
 	const actorJson = {
 		"@context": [
 			"https://www.w3.org/ns/activitystreams",
 			"https://w3id.org/security/v1"
 		],
-		"id": `https://${site?.domain}/${actor}`,
+		"id": actorUri,
 		"type": "Person",
-		"preferredUsername": "Lewis Dale's Blog",
-		"inbox": `https://${domain}/${actor}/inbox`,
-		"followers": `https://${domain}/${actor}/followers`,
-		"following": `https://${domain}/${actor}/following`,
-		"summary": "Posts, streamed from @lewisdaleuk@dapchat.online 's blog",
+		"preferredUsername": actor.preferred_username,
+		"inbox": `${actorUri}/inbox`,
+		"followers": `${actorUri}/followers`,
+		"following": `${actorUri}/following`,
+		"summary": actor.summary,
 		"attachment": [
 			{
 				"type": "PropertyValue",
@@ -30,8 +41,8 @@ export const handler = (req: Request, matches: URLPatternResult) : Response => {
 			}
 		],
 		"publicKey": {
-			"id": `https://${domain}/${actor}#main-key`,
-			"owner": `https://${domain}/${actor}`,
+			"id": `${actorUri}#main-key`,
+			"owner": actorUri,
 			"publicKeyPem": "",
 		}
 	};

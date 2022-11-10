@@ -23,14 +23,21 @@ Deno.test("ActorGateway", async (t) => {
 		actorId = id as number;
 	});
 
-	await t.step("Get a site by id", () => {
+	await t.step("Get an actor by id", () => {
 		const retrieved = gateway.get(actorId);
 
 		assertExists(retrieved);
 		assertEquals(retrieved, { ...actor, id: actorId });
 	});
 
-	await t.step("Update a site", () => {
+	await t.step("Get an actor by handle", () => {
+		const retrieved = gateway.find("handle", actor.handle);
+
+		assertExists(retrieved);
+		assertEquals(retrieved, { ...actor, id: actorId });
+	});
+
+	await t.step("Update an actor", () => {
 		const updated = {
 			id: actorId,
 			handle: "New username",
@@ -43,7 +50,7 @@ Deno.test("ActorGateway", async (t) => {
 		assertEquals(retrieved, updated);
 	});
 
-	await t.step("Delete a site", () => {
+	await t.step("Delete an actor", () => {
 		gateway.delete({ id: actorId, ...actor });
 		assertEquals(gateway.get(actorId), undefined);
 	});

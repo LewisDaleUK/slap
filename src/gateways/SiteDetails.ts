@@ -26,6 +26,12 @@ export default class SiteDetailsGateway implements IGateway<SiteDetails> {
 			.queryEntries<SiteDetails>(`SELECT * FROM site WHERE id = :id LIMIT 1`, { id })[0];
 	}
 
+	find(column: string, value: any): Maybe<SiteDetails> {
+		return this
+			._database
+			.queryEntries<SiteDetails>(`SELECT * FROM site WHERE ${column} = ? LIMIT 1`, [value])[0];
+	}
+
 	list(): SiteDetails[] {
 		return this
 			._database
