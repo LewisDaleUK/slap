@@ -3,3 +3,10 @@ export type SiteDetails = {
 	domain: string;
 	title: string;
 }
+
+export type Actor = {
+	id?: number;
+	handle: string;
+	preferred_username: string;
+	summary?: string;
+}

@@ -1,13 +1,21 @@
+import SiteDetailsGateway from "../gateways/SiteDetails.ts";
+
 export const handler = (req: Request, matches: URLPatternResult) : Response => {
 	const domain = req.headers.get("host");
 	const actor = matches.pathname.groups.actor;
+
+	const site = new SiteDetailsGateway(req.database).get(1);
+	
+	if (!site) {
+		return new Response("Not found", { status: 404 });
+	}
 
 	const actorJson = {
 		"@context": [
 			"https://www.w3.org/ns/activitystreams",
 			"https://w3id.org/security/v1"
 		],
-		"id": `https://${domain}/${actor}`,
+		"id": `https://${site?.domain}/${actor}`,
 		"type": "Person",
 		"preferredUsername": "Lewis Dale's Blog",
 		"inbox": `https://${domain}/${actor}/inbox`,

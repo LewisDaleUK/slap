@@ -3,5 +3,8 @@
 		"jsx": "react-jsx",
 		"jsxImportSource": "https://esm.sh/preact"
 	},
-	"importMap": "import-map.json"
+	"importMap": "import-map.json",
+	"tasks": {
+		"migrate": "deno run --allow-read --allow-write src/commands/migrate.ts"
+	}
 }

@@ -12,7 +12,7 @@ export default class SiteDetailsGateway implements IGateway<SiteDetails> {
 
 	build(): void {
 		this._database.execute(`
-			CREATE TABLE site (
+			CREATE TABLE IF NOT EXISTS site (
 				id INTEGER PRIMARY KEY,
 				domain TEXT NOT NULL,
 				title TEXT NOT NULL
