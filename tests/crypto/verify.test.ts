@@ -1,4 +1,6 @@
+import { verify } from "../../src/crypto/verify.ts";
 import { Bytes } from "../../src/crypto/bytes.ts";
+import { assert } from "https://deno.land/std@0.163.0/testing/asserts.ts";
 
 Deno.test("Verify certificate", async (t) => {
 	let keypair: CryptoKeyPair;
@@ -12,7 +14,7 @@ Deno.test("Verify certificate", async (t) => {
 		} as RsaHashedKeyGenParams, true, ["verify", "sign"])
 	});
 
-	let secret = "my-string-content";
+	const secret = "my-string-content";
 	let signature: string;
 
 	await t.step("Sign key", async () => {
@@ -22,6 +24,7 @@ Deno.test("Verify certificate", async (t) => {
 	});
 
 	await t.step("Verify signature", async () => {
-		
+		const verified = await verify(keypair.publicKey, signature, secret);
+		assert(verified);
 	});
 });
