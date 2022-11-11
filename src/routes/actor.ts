@@ -1,4 +1,3 @@
-import { VNode } from "https://esm.sh/v96/preact@10.11.2/src/index.d.ts";
 import ActorGateway from "../gateways/Actor.ts";
 
 import Profile from '../views/profile.tsx';
