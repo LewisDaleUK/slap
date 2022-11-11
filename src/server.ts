@@ -14,10 +14,10 @@ type Handler = (req: Request, match: URLPatternResult) => Response | Promise<Res
 
 const routes: [URLPattern, Handler][] = [
 	[new URLPattern({ pathname: "/public/*" }), publicFiles],
-	[new URLPattern({ pathname: "/:actor/followers" }), () => new Response("This is where the followers live"),],
-	[new URLPattern({ pathname: "/:actor/inbox" }), inbox],
-	[new URLPattern({ pathname: "/:actor/output" }), () => new Response("Outbox")],
-	[new URLPattern({ pathname: "/(@?):actor:ext(\.json)?" }), actor],
+	[new URLPattern({ pathname: "/(@?):actor:path(/followers|/inbox|/outbox)?:ext(\.json)?" }), actor],
+	[new URLPattern({ pathname: "/:actor/followers:ext(\.json)?" }), () => new Response("This is where the followers live"),],
+	[new URLPattern({ pathname: "/:actor/inbox:ext(\.json)?" }), inbox],
+	[new URLPattern({ pathname: "/:actor/output:ext(\.json)?" }), () => new Response("Outbox")],
 	[new URLPattern({ pathname: "/" }), () => new Response( new TextEncoder().encode(renderToString(Index)) )]
 ];
 

@@ -1,8 +1,10 @@
+import { handler as inbox } from './inbox.ts';
 import ActorGateway from "../gateways/Actor.ts";
-
 import Profile from '../views/profile.tsx';
+import { Handler } from "../types.ts";
 
-export const handler = (req: Request, matches: URLPatternResult) : Response => {
+
+const actor: Handler = (req, matches) : Response => {
 	const site = req.site;
 	const actor = new ActorGateway(req.database).find("handle", matches.pathname.groups.actor);
 
@@ -47,4 +49,19 @@ export const handler = (req: Request, matches: URLPatternResult) : Response => {
 	};
 
 	return new Response(JSON.stringify(actorJson));
+}
+
+const subroutes: [URLPattern, Handler][] = [
+	[new URLPattern({ pathname: "/followers" }), () => new Response("Followers page")],
+	[new URLPattern({ pathname: "/inbox" }), inbox],
+];
+
+export const handler = async (req: Request, matches: URLPatternResult) : Promise<Response> => {
+	const route = subroutes.find(([matcher]) => matcher.test(`.${matches.pathname.groups.path}`, `https://${req.site.domain}`));
+
+	if (route) {
+		return route[1](req, route[0].exec(`.${matches.pathname.groups.path}`, `https://${req.site.domain}`) as URLPatternResult);
+	}
+
+	return await actor(req, matches);
 }
