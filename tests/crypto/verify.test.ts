@@ -12,7 +12,7 @@ Deno.test("Verify certificate", async (t) => {
 		} as RsaHashedKeyGenParams, true, ["verify", "sign"])
 	});
 
-	let secret = "my-secret";
+	let secret = "my-string-content";
 	let signature: string;
 
 	await t.step("Sign key", async () => {
