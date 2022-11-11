@@ -47,7 +47,7 @@ export type Collection = Object & {
 	items: LinkOrObject | Array<LinkOrObject>;
 }
 
-type ActivityType = "Accept"
+export type ActivityType = "Accept"
 	| "Add"
 	| "Announce"
 	| "Arrive"
