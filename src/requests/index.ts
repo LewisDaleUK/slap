@@ -9,8 +9,8 @@ export type Link = {
 	preview?: LinkOrObject;
 };
 
-type ObjectEntry = Object | String;
-type LinkEntry = Link | String;
+type ObjectEntry = Object | string;
+type LinkEntry = Link | string;
 type LinkOrObject = LinkEntry | ObjectEntry | Array<LinkEntry | ObjectEntry>;
 
 export type Object = {
