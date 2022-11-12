@@ -9,27 +9,84 @@ const chunk = (value: string | any[], size: number): (string | any[])[] => {
 	return chunks;
 }
 
-export const pem = async (key: CryptoKey, type: "private" | "public"): Promise<string> => {
-	const bytes = Bytes.from(await crypto.subtle.exportKey(type === "private" ? "pkcs8" : "spki", key));
-	const base64 = chunk(bytes.base64(), 64).join('\n');
+type KeyType = "public" | "private";
 
-	return `-----BEGIN ${type.toUpperCase()} KEY-----
-	${base64}
-	-----END ${type.toUpperCase()} KEY-----`;
+export class Key {
+	private _key: CryptoKey;
+	public readonly type: KeyType;
+
+	constructor(key: CryptoKey, type: KeyType) {
+		this._key = key;
+		this.type = type;
+	}
+ 
+	static async fromPem(pem: string, type: KeyType): Promise<Key> {
+		const content = pem.substring(`-----BEGIN ${type.toUpperCase()} KEY-----`.length, pem.length - `-----END ${type.toUpperCase()} KEY-----`.length).replaceAll(/\s+/g, '');
+
+		const bytes = Bytes.fromBase64(content).arrayBuffer();
+		return new Key(
+			await crypto.subtle.importKey(
+				type === "private" ? "pkcs8" : "spki",
+				bytes,
+				{
+					name: "RSASSA-PKCS1-v1_5",
+					hash: "SHA-256"
+				},
+				true,
+				[type === 'private' ? 'sign' : 'verify']
+			),
+			type
+		);
+	}
+
+	public async toPem(): Promise<string> {
+		const bytes = Bytes.from(await crypto.subtle.exportKey(this.type === "private" ? "pkcs8" : "spki", this._key));
+		const base64 = chunk(bytes.base64(), 64).join('\n');
+
+		return `-----BEGIN ${this.type.toUpperCase()} KEY-----
+		${base64}
+		-----END ${this.type.toUpperCase()} KEY-----`;
+	}
+
+	public async verify(signature: string, data: string): Promise<boolean> {
+		return await crypto.subtle.verify(
+			"RSASSA-PKCS1-v1_5",
+			this._key,
+			Bytes.fromBase64(signature).arrayBuffer(),
+			Bytes.fromUtf8(data).arrayBuffer()
+		);
+	}
+
+	/**
+	 * @param data text-encoded data to sign
+	 * @returns a base64-encoded string containing the signature of the data
+	 */
+	public async sign(data: string): Promise<string> {
+		return Bytes.from(
+			await crypto.subtle.sign("RSASSA-PKCS1-v1_5", this._key, Bytes.fromUtf8(data).arrayBuffer())
+		).base64();
+	}
 }
 
-export const unpem = async (pem: string, type: "private" | "public"): Promise<CryptoKey> => {
-	const content = pem.substring(`-----BEGIN ${type.toUpperCase()} KEY-----`.length, pem.length - `-----END ${type.toUpperCase()} KEY-----`.length).replaceAll(/\s+/g, '');
+export class KeyPair {
+	public privateKey: Key;
+	public publicKey: Key;
 
-	const bytes = Bytes.fromBase64(content).arrayBuffer();
-	return await crypto.subtle.importKey(
-		type === "private" ? "pkcs8" : "spki",
-		bytes,
-		{
+	constructor(privateKey: Key, publicKey: Key) {
+		this.privateKey = privateKey;
+		this.publicKey = publicKey;
+	}
+
+	static async generate(modulusLength = 2048): Promise<KeyPair> {
+		const { privateKey, publicKey } = await crypto.subtle.generateKey({
 			name: "RSASSA-PKCS1-v1_5",
+			modulusLength,
+			publicExponent: new Uint8Array([0x01, 0x00, 0x01]),
 			hash: "SHA-256"
-		},
-		true,
-		[type === 'private' ? 'sign' : 'verify']
-	);
+		} as RsaHashedKeyGenParams, true, ["verify", "sign"]);
+		return new KeyPair(
+			new Key(privateKey, "private"),
+			new Key(publicKey, "public")
+		);
+	}
 }

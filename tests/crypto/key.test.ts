@@ -1,42 +1,53 @@
-import { assertEquals, assertObjectMatch, assertStringIncludes } from "https://deno.land/std@0.163.0/testing/asserts.ts";
-import { pem, unpem } from "../../src/crypto/key.ts";
+import { assert, assertEquals, assertStringIncludes } from "https://deno.land/std@0.163.0/testing/asserts.ts";
+import { Key, KeyPair } from "../../src/crypto/key.ts";
 
 Deno.test("Convert a key to PEM and back again", async (t) => {
-	let keypair: CryptoKeyPair;
+	let keypair: KeyPair;
 
 	await t.step("Generate keypair", async () => {
-		keypair = await crypto.subtle.generateKey({
-			name: "RSASSA-PKCS1-v1_5",
-			modulusLength: 2048,
-			publicExponent: new Uint8Array([0x01, 0x00, 0x01]),
-			hash: "SHA-256"
-		} as RsaHashedKeyGenParams, true, ["verify", "sign"]);
+		keypair = await KeyPair.generate();
 	});
 
 	let publicPem: string;
 	let privatePem: string;
 
 	await t.step("Convert keys to PEM", async () => {
-		publicPem = await pem(keypair.publicKey, "public");
+		publicPem = await keypair.publicKey.toPem();
 		assertStringIncludes(publicPem, "BEGIN PUBLIC KEY");
 
-		privatePem = await pem(keypair.privateKey, "private");
+		privatePem = await keypair.privateKey.toPem()
 		assertStringIncludes(privatePem, "BEGIN PRIVATE KEY");
 	});
 
 	await t.step("Convert private key back", async () => {
-		const key = await unpem(privatePem, "private");
-		const exported = await crypto.subtle.exportKey("pkcs8", key);
-		const exportedOriginal = await crypto.subtle.exportKey("pkcs8", keypair.privateKey);
+		const key = await Key.fromPem(privatePem, "private");
 
-		assertEquals(exported, exportedOriginal);
+		assertEquals(key.toPem(), keypair.privateKey.toPem());
 	});
 
 	await t.step("Convert public key back", async () => {
-		const key = await unpem(publicPem, "public");
-		const exported = await crypto.subtle.exportKey("spki", key);
-		const exportedOriginal = await crypto.subtle.exportKey("spki", keypair.publicKey);
+		const key = await Key.fromPem(publicPem, "public");
 
-		assertEquals(exported, exportedOriginal);
+		assertEquals(key.toPem(), keypair.publicKey.toPem());
+	});
+});
+
+Deno.test("Verify certificate", async (t) => {
+	let keypair: KeyPair;
+
+	await t.step("Create keypair", async () => {
+		keypair = await KeyPair.generate();
+	});
+
+	const secret = "my-string-content";
+	let signature: string;
+
+	await t.step("Sign key", async () => {
+		signature = await keypair.privateKey.sign(secret);
+	});
+
+	await t.step("Verify signature", async () => {
+		const verified = await keypair.publicKey.verify(signature, secret);
+		assert(verified);
 	});
 });
