@@ -4,9 +4,4 @@ export type SiteDetails = {
 	title: string;
 }
 
-export type Actor = {
-	id?: number;
-	handle: string;
-	preferred_username: string;
-	summary?: string;
-}
+export { Actor, type ActorEntity } from './Actor.ts';

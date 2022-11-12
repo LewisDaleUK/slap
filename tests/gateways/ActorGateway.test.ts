@@ -1,6 +1,8 @@
 import { assertEquals, assertExists } from "https://deno.land/std@0.163.0/testing/asserts.ts";
+import { KeyPair } from "../../src/crypto/index.ts";
 import ActorGateway from "../../src/gateways/Actor.ts";
 import Database from "../../src/lib/Database.ts";
+import { Actor } from "../../src/models/index.ts";
 
 Deno.test("ActorGateway", async (t) => {
 	const database = new Database(":memory:");
@@ -11,48 +13,55 @@ Deno.test("ActorGateway", async (t) => {
 	});
 
 	let actorId: number;
-	const actor = {
-		handle: "username",
-		preferred_username: "Display Name",
-		summary: "A summary"
-	};
-	await t.step("Add a new actor", () => {
-		const id = gateway.save(actor);
+	const actor = new Actor(
+		"username",
+		"Display Name",
+		await KeyPair.generate(),
+		"A summary",
+	);
+
+	await t.step("Add a new actor", async () => {
+		const id = await gateway.save(actor);
 		assertExists(id);
 
 		actorId = id as number;
 	});
 
-	await t.step("Get an actor by id", () => {
-		const retrieved = gateway.get(actorId);
+	await t.step("Get an actor by id", async () => {
+		const retrieved = await gateway.get(actorId);
 
+		const expected = await Actor.from({ ...await actor.entity(), id: actorId });
 		assertExists(retrieved);
-		assertEquals(retrieved, { ...actor, id: actorId });
+		assertEquals(retrieved, expected);
 	});
 
-	await t.step("Get an actor by handle", () => {
-		const retrieved = gateway.find("handle", actor.handle);
+	await t.step("Get an actor by handle", async () => {
+		const retrieved = await gateway.find("handle", actor.handle);
+
+		const expected = await Actor.from({ ...await actor.entity(), id: actorId });
 
 		assertExists(retrieved);
-		assertEquals(retrieved, { ...actor, id: actorId });
+		assertEquals(retrieved, expected);
 	});
 
-	await t.step("Update an actor", () => {
-		const updated = {
+	await t.step("Update an actor", async () => {
+		const updated = await Actor.from({
+			...await actor.entity(),
 			id: actorId,
-			handle: "New username",
+			handle: "New handle",
 			preferred_username: "An Updated Display Name",
-			summary: "More of a summary"
-		};
-		gateway.save(updated);
-		const retrieved = gateway.get(actorId);
+			summary: "More summaries"
+		});
+			
+		await gateway.save(updated);
+		const retrieved = await gateway.get(actorId);
 
 		assertEquals(retrieved, updated);
 	});
 
-	await t.step("Delete an actor", () => {
-		gateway.delete({ id: actorId, ...actor });
-		assertEquals(gateway.get(actorId), undefined);
+	await t.step("Delete an actor", async () => {
+		gateway.delete(await Actor.from({ ...await actor.entity(), id: actorId }));
+		assertEquals(await gateway.get(actorId), undefined);
 	});
 });
 

@@ -1,5 +1,5 @@
 import { Database } from "../lib/Database.ts";
-import { Actor } from "../models/index.ts";
+import { Actor, ActorEntity } from "../models/index.ts";
 import { Maybe } from "../types.ts";
 import { IGateway } from "./index.ts";
 
@@ -10,41 +10,66 @@ export default class ActorGateway implements IGateway<Actor> {
 		this._database = database;
 	}
 
+	private async map(row?: ActorEntity): Promise<Maybe<Actor>> {
+		if (row) {
+			return await Actor.from(row);
+		}
+
+		return;
+	}
+
 	build(): void {
 		this._database.execute(
 			`CREATE TABLE IF NOT EXISTS actor (
 				id INTEGER PRIMARY KEY,
 				handle TEXT NOT NULL,
 				preferred_username TEXT NOT NULL,
-				summary TEXT NOT NULL DEFAULT ""
+				summary TEXT NOT NULL DEFAULT "",
+				public_key_pem TEXT NOT NULL,
+				private_key_pem TEXT NOT NULL
 			)`
 		);
 	}
 
-	get(id: string|number): Maybe<Actor> {
-		return this._database.queryEntries<Actor>("SELECT * FROM actor WHERE id = ? LIMIT 1", [id])[0];
+	async get(id: string|number): Promise<Maybe<Actor>> {
+		return await this.map(
+			this._database.queryEntries<ActorEntity>("SELECT * FROM actor WHERE id = ? LIMIT 1", [id])[0]
+		);
 	}
 
-	find(column: string, value: any): Maybe<Actor> {
-		return this._database.queryEntries<Actor>(`SELECT * FROM actor WHERE ${column} = ? LIMIT 1`, [value])[0];
+	async find(column: string, value: any): Promise<Maybe<Actor>> {
+		return await this.map(
+			this._database.queryEntries<ActorEntity>(`SELECT * FROM actor WHERE ${column} = ? LIMIT 1`, [value])[0]
+		);
 	}
 	
 	list(): Actor[] {
 		throw new Error("Method not implemented.");
 	}
 	
-	save(item: Actor): Maybe<string|number> {
+	async save(item: Actor): Promise<Maybe<string|number>> {
+		const entity = await item.entity();
+
 		if (item.id) {
-			this._database.query(
-				"UPDATE actor SET handle = :handle, preferred_username = :preferred_username, summary = :summary WHERE id = :id",
-				item
+			this._database.query<ActorEntity[]>(
+				`UPDATE actor SET
+					handle = :handle,
+					preferred_username = :preferred_username,
+					summary = :summary,
+					private_key_pem = :private_key_pem,
+					public_key_pem = :public_key_pem
+				WHERE id = :id`,
+				entity
 			);
 			return item.id;
 		}
 
-		this._database.query(
-			"INSERT INTO actor (handle, preferred_username, summary) VALUES (:handle, :preferred_username, :summary)",
-			item
+		console.log(await item.entity());
+		this._database.query<ActorEntity[]>(
+			`INSERT INTO actor
+				(handle, preferred_username, summary, public_key_pem, private_key_pem)
+			VALUES (:handle, :preferred_username, :summary, :public_key_pem, :private_key_pem)`,
+			entity,
 		);
 		return this._database.lastInsertRowId;
 	}

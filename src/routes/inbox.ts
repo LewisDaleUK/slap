@@ -1,4 +1,4 @@
-import { Activity, Object, ActivityType } from "../requests/index.ts";
+import { Activity } from "../requests/index.ts";
 
 export const handler = async (req: Request): Promise<Response> => {
 	let activity: Activity;
