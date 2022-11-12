@@ -1,6 +1,6 @@
 import { Bytes } from "./bytes.ts";
 
-const chunk = (value: string | any[], size: number): (string | any[])[] => {
+const chunk = <T> (value: string | T[], size: number): (string | T[])[] => {
 	const chunks = [];
 	for(let i = 0; i < value.length; i += size) {
 		chunks.push(value.slice(i, i + size));
