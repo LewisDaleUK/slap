@@ -4,9 +4,9 @@ import Profile from '../views/profile.tsx';
 import { Handler } from "../types.ts";
 
 
-const actor: Handler = (req, matches) : Response => {
+const actor: Handler = async (req, matches) : Promise<Response> => {
 	const site = req.site;
-	const actor = new ActorGateway(req.database).find("handle", matches.pathname.groups.actor);
+	const actor = await new ActorGateway(req.database).find("handle", matches.pathname.groups.actor);
 
 	if (!actor) {
 		return new Response("Not found", { status: 404 });
@@ -44,7 +44,7 @@ const actor: Handler = (req, matches) : Response => {
 		"publicKey": {
 			"id": `${actorUri}#main-key`,
 			"owner": actorUri,
-			"publicKeyPem": "",
+			"publicKeyPem": await actor.keys.publicKey.toPem(),
 		}
 	};
 

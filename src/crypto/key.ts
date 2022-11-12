@@ -45,7 +45,7 @@ export class Key {
 
 		return `-----BEGIN ${this.type.toUpperCase()} KEY-----
 		${base64}
-		-----END ${this.type.toUpperCase()} KEY-----`;
+		-----END ${this.type.toUpperCase()} KEY-----`.replaceAll('\t', '');
 	}
 
 	public async verify(signature: string, data: string): Promise<boolean> {

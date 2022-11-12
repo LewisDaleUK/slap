@@ -31,7 +31,7 @@ export class Actor {
 			props.handle,
 			props.preferred_username,
 			new KeyPair(privateKey, publicKey),
-			props.summary,
+			props.summary || "",
 			props.id,
 		);
 	}
@@ -45,7 +45,7 @@ export class Actor {
 				{
 					id: this.id,
 					handle: this.handle,
-					summary: this.summary,
+					summary: this.summary || "",
 					preferred_username: this.preferred_username,
 					private_key_pem: await this.keys.privateKey.toPem(),
 					public_key_pem: await this.keys.publicKey.toPem()
