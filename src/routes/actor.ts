@@ -5,6 +5,8 @@ import { Handler } from "../types.ts";
 
 
 const actor: Handler = async (req, matches) : Promise<Response> => {
+	const accept = req.headers.get("accept")?.includes("application/activity+json");
+
 	const site = req.site;
 	const actor = await new ActorGateway(req.database).find("handle", matches.pathname.groups.actor);
 
@@ -16,7 +18,7 @@ const actor: Handler = async (req, matches) : Promise<Response> => {
 
 	const ext = matches.pathname.groups.ext;
 
-	if (ext !== ".json") {	
+	if (ext !== ".json" && !accept) {	
 		return new Response(
 			new TextEncoder().encode(Profile(actor))
 		);
