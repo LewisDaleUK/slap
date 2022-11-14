@@ -8,6 +8,7 @@ export type ActorEntity = {
 	public_key_pem: string;
 	summary?: string;
 }
+
 export class Actor {
 	public id?: number;
 	public handle: string;

@@ -2,7 +2,7 @@ import ActorGateway from "../gateways/Actor.ts";
 import SiteDetailsGateway from "../gateways/SiteDetails.ts";
 import type { Handler } from "../types.ts";
 
-export const handler: Handler = (req, matches) => {
+export const handler: Handler = async (req, matches) => {
 	const resource = matches.search.groups.resource;
 
 	if (resource) {
@@ -15,7 +15,7 @@ export const handler: Handler = (req, matches) => {
 			return new Response(null, { status: 404 });
 		}
 
-		const actor = new ActorGateway(req.database).find("handle", handle);
+		const actor = await new ActorGateway(req.database).find("handle", handle);
 
 		if (!actor) {
 			return new Response(null, { status: 404 });
