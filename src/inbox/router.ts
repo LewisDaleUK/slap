@@ -35,7 +35,7 @@ const verify = async (req: Request, activity: Activity): Promise<boolean> => {
 
 	const key = await Crypto.Key.fromPem(body.publicKey.publicKeyPem as string, "public");
 	const signature = extractSignature(req.headers.get("signature") as string);
-	const expected = `(request-target): post ${inboxFragment}\nhost: ${url.hostname}\ndate: ${req.headers.get("date")}\ndigest: ${req.headers.get("digest")}`
+	const expected = `(request-target): post ${inboxFragment}\nhost: ${req.site.domain}\ndate: ${req.headers.get("date")}\ndigest: ${req.headers.get("digest")}`
 
 	console.log(signature, expected);
 	return false;
