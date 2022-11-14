@@ -2,16 +2,13 @@ import * as Inbox from '../inbox/mod.ts';
 import ActorGateway from "./gateway.ts";
 import Profile from '../views/profile.tsx';
 import { Handler } from "../types.ts";
+import { Actor } from './models.ts';
 
 const actor: Handler = async (req, matches) : Promise<Response> => {
 	const accept = req.headers.get("accept")?.includes("application/activity+json");
 
 	const site = req.site;
-	const actor = await new ActorGateway(req.database).find("handle", matches.pathname.groups.actor);
-
-	if (!actor) {
-		return new Response("Not found", { status: 404 });
-	}
+	const actor = req.actor as Actor;
 
 	const actorUri = `https://${site.domain}/${actor.handle}`;
 
@@ -59,6 +56,14 @@ const subroutes: [URLPattern, Handler][] = [
 ];
 
 export const handler = async (req: Request, matches: URLPatternResult) : Promise<Response> => {
+	req.actor = await new ActorGateway(req.database).find("handle", matches.pathname.groups.actor);
+
+	if (!req.actor) {
+		return new Response(null, {
+			status: 404
+		});
+	}
+
 	const route = subroutes.find(([matcher]) => matcher.test(`.${matches.pathname.groups.path}`, `https://${req.site.domain}`));
 
 	if (route) {

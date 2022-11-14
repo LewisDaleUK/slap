@@ -1,4 +1,6 @@
 import { Database } from "./lib/Database.ts";
+import { Actor } from "./requests/index.ts";
+import * as Actor from "./actor/mod.ts";
 import * as Site from "./site/mod.ts";
 
 export type Maybe<T> = T | undefined | null;
@@ -18,6 +20,7 @@ declare global {
 	interface Request {
 		database: Database;
 		site: Site.Model;
+		actor?: Actor.Model;
 	}
 
 }
