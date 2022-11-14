@@ -62,7 +62,7 @@ const sendAcceptMessage = async (req: Request, activity: Activity): Promise<void
 	}
 	const url = new URL(activity.actor as string);
 	const domain = url.hostname;
-	const actor = req.url.replace(`https://${domain}`, '');
+	const actor = (activity.actor as string).replace(`https://${domain}`, '');
 	const date = new Date();
 
 	const inbox = `${url.toString()}/inbox`; // TODO: Get these URLS from webfinger
@@ -76,12 +76,15 @@ const sendAcceptMessage = async (req: Request, activity: Activity): Promise<void
 		digest: `SHA-256=${hash}`,
 		"content-type": "application/activity+json"
 	};
+
+	console.log(signatureHeaders);
+	
 	const signature = await req.actor?.keys.privateKey.sign(headersToSignature(signatureHeaders));
 	const header = `keyId="https://${req.site.domain}/${req.actor?.handle}",headers="(request-target) host date digest content-type",signature="${signature}"`;
 	const headers = {
 		Signature: header,
-		Date: signatureHeaders.date,
 		Host: signatureHeaders.host,
+		Date: signatureHeaders.date,
 		Digest: signatureHeaders.digest,
 		"Content-Type": signatureHeaders["content-type"],
 	};
