@@ -20,6 +20,14 @@ const extractSignature = (signature: string): SignatureHeaders => {
 	}, {} as { [k: string]: string }) as SignatureHeaders;
 }
 
+const expectedSignature = (headers: SignatureHeaders, req: Request) => 
+	headers.headers.split(' ').map(h => {
+		if (h === "(request-target)") {
+			return `(request-target): post /${req.actor?.handle}/inbox`;
+		}
+		return `${h}: ${req.headers.get(h)}`;
+	}).join('\n');
+
 const verify = async (req: Request, activity: Activity): Promise<boolean> => {
 	const url = new URL(activity.actor as string);
 	const host = url.hostname;
@@ -35,7 +43,7 @@ const verify = async (req: Request, activity: Activity): Promise<boolean> => {
 
 	const key = await Crypto.Key.fromPem(body.publicKey.publicKeyPem as string, "public");
 	const signature = extractSignature(req.headers.get("signature") as string);
-	const expected = `(request-target): post ${inboxFragment}\nhost: ${req.site.domain}\ndate: ${req.headers.get("date")}\ndigest: ${req.headers.get("digest")}`
+	const expected = expectedSignature(signature, req);
 
 	console.log(signature, expected);
 	console.log(await key.verify(signature.signature, expected));
