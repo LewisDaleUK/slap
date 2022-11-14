@@ -20,6 +20,8 @@ const routes: [URLPattern, Handler][] = [
 ];
 
 const handler = async (req: Request): Promise<Response> => {
+	console.log(`Received ${req.method} request to ${req.url}`);
+	
 	const route = routes.find(([matcher]) => matcher.test(req.url));
 
 	req.database = new Database("app.db");
