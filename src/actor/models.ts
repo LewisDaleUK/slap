@@ -1,4 +1,4 @@
-import { Key, KeyPair } from "../crypto/index.ts";
+import { Key, KeyPair } from "../crypto/mod.ts";
 
 export type ActorEntity = {
 	id?: number;

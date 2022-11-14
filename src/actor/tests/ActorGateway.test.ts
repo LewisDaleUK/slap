@@ -1,5 +1,5 @@
 import { assertEquals, assertExists } from "https://deno.land/std@0.163.0/testing/asserts.ts";
-import { KeyPair } from "../../crypto/index.ts";
+import { KeyPair } from "../../crypto/mod.ts";
 import Database from "../../lib/Database.ts";
 import ActorGateway from "../gateway.ts";
 import { Actor } from "../models.ts";

@@ -6,6 +6,8 @@
 	"importMap": "import-map.json",
 	"tasks": {
 		"migrate": "deno run --allow-read --allow-write src/commands/migrate.ts",
-		"setup": "deno run --allow-read --allow-write src/commands/setup.ts"
+		"setup": "deno run --allow-read --allow-write src/commands/setup.ts",
+		"test": "deno test",
+		"test:watch": "deno test . --watch"
 	}
 }

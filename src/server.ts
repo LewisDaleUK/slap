@@ -2,7 +2,7 @@ import { serve } from "https://deno.land/std@0.162.0/http/server.ts";
 
 import { renderToString } from "./deps.ts";
 
-import * as Actor from "./actor/index.ts";
+import * as Actor from "./actor/mod.ts";
 import { handler as publicFiles } from "./routes/public.ts";
 import { handler as webfinger } from "./routes/webfinger.ts";
 

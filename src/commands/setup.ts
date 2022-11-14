@@ -4,7 +4,7 @@ import * as Actor from "../actor/index.ts";
 
 import Database from "../lib/Database.ts";
 import { SiteDetails } from "../models/index.ts";
-import { KeyPair } from "../crypto/index.ts";
+import { KeyPair } from "../crypto/mod.ts";
 
 export const handler = async () => {
 	const database = new Database("app.db");
