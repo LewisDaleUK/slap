@@ -71,13 +71,13 @@ const sendAcceptMessage = async (req: Request, activity: Activity): Promise<void
 
 	const signatureHeaders = {
 		"(request-target)": `post ${fragment}`,
-		date: date.toUTCString(),
 		host: domain,
+		date: date.toUTCString(),
 		digest: `SHA-256=${hash}`,
 		"content-type": "application/activity+json"
 	};
 	const signature = await req.actor?.keys.privateKey.sign(headersToSignature(signatureHeaders));
-	const header = `keyId="https://${req.site.domain}/${req.actor?.handle}",headers="host date digest content-type",signature="${signature}"`;
+	const header = `keyId="https://${req.site.domain}/${req.actor?.handle}",headers="(request-target) host date digest content-type",signature="${signature}"`;
 	const headers = {
 		Signature: header,
 		Date: signatureHeaders.date,
