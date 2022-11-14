@@ -1,6 +1,6 @@
 import { assertEquals, assertExists } from "https://deno.land/std@0.163.0/testing/asserts.ts";
-import SiteDetailsGateway from "../../src/gateways/SiteDetails.ts";
-import Database from "../../src/lib/Database.ts";
+import SiteDetailsGateway from "../gateway.ts";
+import Database from "../../lib/Database.ts";
 
 Deno.test("SiteDetailsGateway", async (t) => {
 	const database = new Database(":memory:");

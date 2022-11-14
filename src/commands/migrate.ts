@@ -1,5 +1,5 @@
-import { ActorGateway } from "../actor/index.ts";
-import SiteDetailsGateway from "../gateways/SiteDetails.ts";
+import { ActorGateway } from "../actor/mod.ts";
+import { SiteDetailsGateway } from "../site/mod.ts"
 import Database from "../lib/Database.ts";
 
 const gateways = [
