@@ -86,6 +86,8 @@ const sendAcceptMessage = async (req: Request, activity: Activity): Promise<void
 		"Content-Type": signatureHeaders["content-type"],
 	};
 
+	console.log(headers);
+
 	const res = await fetch(inbox, {
 		headers,
 		method: "POST",
