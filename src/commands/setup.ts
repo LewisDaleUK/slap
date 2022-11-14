@@ -11,22 +11,22 @@ export const handler = async () => {
 	const domain = prompt("What domain will your website use?");
 	const title = prompt("What is the name of your site?", domain as string);
 	
-	const site = { domain, title } as Site.SiteDetails;
+	const site = { domain, title } as Site.Model;
 
-	new Site.SiteDetailsGateway(database).save(site);
+	new Site.Gateway(database).save(site);
 
 	const handle = prompt("What is your handle?");
 	const preferred_username = prompt("What is your preferred username?");
 	const summary = prompt("Enter a brief summary of your profile");
 
-	const actor = new Actor.Actor(
+	const actor = new Actor.Model(
 		handle as string,
 		preferred_username as string,
 		await KeyPair.generate(),
 		summary as string
 	);
 
-	await new Actor.ActorGateway(database).save(actor);
+	await new Actor.Gateway(database).save(actor);
 }
 
 await handler();

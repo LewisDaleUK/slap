@@ -1,7 +1,7 @@
-import SiteDetailsGateway from "./gateway.ts";
-import { type SiteDetails  } from "./models.ts";
+import Gateway from "./gateway.ts";
+import { type SiteDetails as Model } from "./models.ts";
 
 export {
-	SiteDetailsGateway,
-	SiteDetails,
+	Gateway,
+	Model,
 };

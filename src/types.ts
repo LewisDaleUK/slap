@@ -1,5 +1,5 @@
 import { Database } from "./lib/Database.ts";
-import { SiteDetails } from "./models/index.ts";
+import * as Site from "./site/mod.ts";
 
 export type Maybe<T> = T | undefined | null;
 export type Handler = (req: Request, match: URLPatternResult) => Response | Promise<Response>;
@@ -17,7 +17,7 @@ export interface IGateway<T> {
 declare global {
 	interface Request {
 		database: Database;
-		site: SiteDetails;
+		site: Site.Model;
 	}
 
 }

@@ -1,5 +1,5 @@
-import { ActorGateway } from "../actor/mod.ts";
-import SiteDetailsGateway from "../gateways/SiteDetails.ts";
+import * as Actor from "../actor/mod.ts";
+import * as Site from "../site/mod.ts";
 import type { Handler } from "../types.ts";
 
 export const handler: Handler = async (req, matches) => {
@@ -9,13 +9,13 @@ export const handler: Handler = async (req, matches) => {
 		const [_type, id] = resource.split(/\:(.*)/, 2);
 		const [handle, domain] = id.split("@", 2);
 
-		const site = new SiteDetailsGateway(req.database).find("domain", domain);
+		const site = new Site.Gateway(req.database).find("domain", domain);
 
 		if (!site) {
 			return new Response(null, { status: 404 });
 		}
 
-		const actor = await new ActorGateway(req.database).find("handle", handle);
+		const actor = await new Actor.Gateway(req.database).find("handle", handle);
 
 		if (!actor) {
 			return new Response(null, { status: 404 });

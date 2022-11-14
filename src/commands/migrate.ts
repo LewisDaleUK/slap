@@ -1,10 +1,10 @@
-import { ActorGateway } from "../actor/mod.ts";
-import { SiteDetailsGateway } from "../site/mod.ts"
+import * as Actor from "../actor/mod.ts";
+import { Gateway } from "../site/mod.ts"
 import Database from "../lib/Database.ts";
 
 const gateways = [
-	SiteDetailsGateway,
-	ActorGateway,
+	Gateway,
+	Actor.Gateway,
 ];
 
 export const handler = () => {

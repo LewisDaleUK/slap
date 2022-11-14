@@ -2,7 +2,7 @@ import { Maybe, IGateway } from "../types.ts";
 import { SiteDetails } from "./models.ts";
 import { Database } from "../lib/Database.ts";
 
-export default class SiteDetailsGateway implements IGateway<SiteDetails> {
+export default class Gateway implements IGateway<SiteDetails> {
 	private readonly _database: Database;
 
 	constructor(database: Database) {
