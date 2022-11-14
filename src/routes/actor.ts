@@ -31,11 +31,12 @@ const actor: Handler = async (req, matches) : Promise<Response> => {
 		],
 		"id": actorUri,
 		"type": "Person",
-		"preferredUsername": actor.preferred_username,
+		"preferredUsername": actor.handle,
 		"inbox": `${actorUri}/inbox`,
 		"followers": `${actorUri}/followers`,
 		"following": `${actorUri}/following`,
 		"summary": actor.summary,
+		"name": actor.preferred_username, // TODO: Rename this
 		"attachment": [
 			{
 				"type": "PropertyValue",
