@@ -67,7 +67,7 @@ const sendAcceptMessage = async (req: Request, activity: Activity): Promise<void
 
 	const inbox = `${url.toString()}/inbox`; // TODO: Get these URLS from webfinger
 	const fragment = `${actor}/inbox`;
-	const hash = await Crypto.digest(JSON.stringify(activity));
+	const hash = await Crypto.digest(JSON.stringify(createMessage));
 
 	const signatureHeaders = {
 		"(request-target)": `post ${fragment}`,
