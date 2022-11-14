@@ -31,11 +31,13 @@ const verify = async (req: Request, activity: Activity): Promise<boolean> => {
 		}
 	});
 	const body = await response.json();
+	const inboxFragment = `${req.actor?.handle}/inbox`;
 
 	const key = await Crypto.Key.fromPem(body.publicKey.publicKeyPem as string, "public");
 	const signature = extractSignature(req.headers.get("signature") as string);
+	const expected = `(request-target): post ${inboxFragment}\nhost: ${url.hostname}\ndate: ${req.headers.get("date")}\ndigest: ${req.headers.get("digest")}`
 
-	console.log(signature);
+	console.log(signature, expected);
 	return false;
 }
 
