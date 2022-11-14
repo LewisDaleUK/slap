@@ -23,16 +23,16 @@ export class Actor {
 		this.keys = keys;
 	}
 
-	static async from(props: ActorEntity): Promise<Actor> {
-		const privateKey = await Key.fromPem(props.private_key_pem, "private");
-		const publicKey = await Key.fromPem(props.public_key_pem, "public");
+	static async from(entity: ActorEntity): Promise<Actor> {
+		const privateKey = await Key.fromPem(entity.private_key_pem, "private");
+		const publicKey = await Key.fromPem(entity.public_key_pem, "public");
 
 		return new Actor(
-			props.handle,
-			props.preferred_username,
+			entity.handle,
+			entity.preferred_username,
 			new KeyPair(privateKey, publicKey),
-			props.summary || "",
-			props.id,
+			entity.summary || "",
+			entity.id,
 		);
 	}
 

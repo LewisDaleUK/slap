@@ -13,7 +13,7 @@ export const handler = async () => {
 	
 	const site = { domain, title } as SiteDetails;
 
-	await new SiteDetailsGateway(database).save(site);
+	new SiteDetailsGateway(database).save(site);
 
 	const handle = prompt("What is your handle?");
 	const preferred_username = prompt("What is your preferred username?");
