@@ -14,7 +14,10 @@ const verify = async (req: Request, activity: Activity): Promise<boolean> => {
 	});
 	const body = await response.json();
 
-	console.log(body);
+	const key = await Crypto.Key.fromPem(body.publicKey.publicKeyPem as string, "public");
+	const signature = req.headers.get("signature") as string;
+
+	console.log(signature);
 	return false;
 }
 
