@@ -1,12 +1,12 @@
 import { FunctionComponent } from 'preact';
 import render from "preact-render-to-string";
-import { Actor } from '../models/index.ts';
+import * as Actor from '../actor/mod.ts';
 import Layout from './layouts/layout.tsx';
 
-const Profile: FunctionComponent<{ actor: Actor }> = ({ actor }) => (
+const Profile: FunctionComponent<{ actor: Actor.Model }> = ({ actor }) => (
 	<Layout>
 		<h1>{ actor.handle }</h1>
 	</Layout>
 );
 
-export default (actor: Actor) => render(<Profile actor={actor} />);
+export default (actor: Actor.Model) => render(<Profile actor={actor} />);
