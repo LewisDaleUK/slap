@@ -21,7 +21,10 @@ export class Key {
 	}
  
 	static async fromPem(pem: string, type: KeyType): Promise<Key> {
-		const content = pem.substring(`-----BEGIN ${type.toUpperCase()} KEY-----`.length, pem.length - `-----END ${type.toUpperCase()} KEY-----`.length).replaceAll(/\s+/g, '');
+		const content = pem.trim()
+			.replace(`-----BEGIN ${type.toUpperCase()} KEY-----`, '')
+			.replace(`-----END ${type.toUpperCase()} KEY-----`, '')
+			.replaceAll(/\s+/g, '');
 
 		const bytes = Bytes.fromBase64(content).arrayBuffer();
 		return new Key(
