@@ -1,4 +1,4 @@
-import { Activity, Object } from "../requests/index.ts";
+import { Activity } from "../requests/index.ts";
 import * as Actor from "../actor/mod.ts";
 import * as Crypto from "../crypto/mod.ts";
 
