@@ -1,5 +1,4 @@
 import { Database } from "./lib/Database.ts";
-import { Actor } from "./requests/index.ts";
 import * as Actor from "./actor/mod.ts";
 import * as Site from "./site/mod.ts";
 

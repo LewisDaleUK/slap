@@ -1,7 +1,6 @@
 import { Activity, Object } from "../requests/index.ts";
 import * as Actor from "../actor/mod.ts";
 import * as Crypto from "../crypto/mod.ts";
-import { Values } from "https://deno.land/x/sqlite@v3.7.0/src/constants.ts";
 
 type SignatureHeaders = {
 	keyId: string;
@@ -28,26 +27,72 @@ const expectedSignature = (headers: SignatureHeaders, req: Request) =>
 		return `${h}: ${req.headers.get(h)}`;
 	}).join('\n');
 
-const verify = async (req: Request, activity: Activity): Promise<boolean> => {
-	const url = new URL(activity.actor as string);
-	const host = url.hostname;
+const headersToSignature = (headers: { [k: string]: string }) =>
+	Object.entries(headers)
+		.map(([k, v]) => `${k.toLowerCase()}: ${v}`)
+		.join('\n');
 
-	// TODO: We should use WebFinger to get actual URLs and request using application/activity+json
-	const response = await fetch(`${url}`, {
+const verify = async (req: Request, activity: Activity): Promise<boolean> => {
+	const response = await fetch(activity.actor as string, {
 		headers: {
 			"accept": "application/activity+json"
 		}
 	});
 	const body = await response.json();
-	const inboxFragment = `/${req.actor?.handle}/inbox`;
 
 	const key = await Crypto.Key.fromPem(body.publicKey.publicKeyPem as string, "public");
 	const signature = extractSignature(req.headers.get("signature") as string);
 	const expected = expectedSignature(signature, req);
 
-	console.log(signature, expected);
-	console.log(await key.verify(signature.signature, expected));
-	return false;
+	return await key.verify(signature.signature, expected);
+}
+
+const sendAcceptMessage = async (req: Request, activity: Activity): Promise<void> => {
+	const uuid = crypto.randomUUID();
+
+	const createMessage = {
+		"@context": "https://www.w3.org/ns/activitystreams",
+	
+		"id": `https://${req.site.domain}/${req.actor?.handle}/${uuid}`,
+		"type": "Create",
+		"actor": `https://${req.site.domain}/${req.actor?.handle}`,
+		'to': ['https://www.w3.org/ns/activitystreams#Public'],
+		"object": activity,
+		"cc": [activity.actor]
+	}
+	const url = new URL(activity.actor as string);
+	const domain = url.hostname;
+	const actor = req.url.replace(`https://${domain}`, '');
+	const date = new Date();
+
+	const inbox = `${url.toString()}/inbox`; // TODO: Get these URLS from webfinger
+	const fragment = `${actor}/inbox`;
+	const hash = await Crypto.digest(JSON.stringify(activity));
+
+	const signatureHeaders = {
+		"(request-target)": `post ${fragment}`,
+		date: date.toUTCString(),
+		host: domain,
+		digest: `SHA-256=${hash}`,
+		"content-type": "application/activity+json"
+	};
+	const signature = await req.actor?.keys.privateKey.sign(headersToSignature(signatureHeaders));
+	const header = `keyId="https://${req.site.domain}/${req.actor?.handle}",headers="host date digest content-type",signature="${signature}"`;
+	const headers = {
+		Signature: header,
+		Date: signatureHeaders.date,
+		Host: signatureHeaders.host,
+		Digest: signatureHeaders.digest,
+		"Content-Type": signatureHeaders["content-type"],
+	};
+
+	const res = await fetch(inbox, {
+		headers,
+		method: "POST",
+		body: JSON.stringify(createMessage)
+	});
+
+	console.log(res);
 }
 
 export const handler = async (req: Request): Promise<Response> => {
@@ -62,12 +107,14 @@ export const handler = async (req: Request): Promise<Response> => {
 				case "Follow": {
 					const verified = await verify(req, activity);
 
+					// Verify request
 					if (!verified) {
 						return new Response(null, { status: 403 });
 					}
 
-					// Verify request
 					// Send accept
+					await sendAcceptMessage(req, activity);
+
 					// Store follower
 
 					return new Response("Follow");
