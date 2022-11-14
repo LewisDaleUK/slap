@@ -93,6 +93,7 @@ const sendAcceptMessage = async (req: Request, activity: Activity): Promise<void
 	});
 
 	console.log(res);
+	console.log(await res.text());
 }
 
 export const handler = async (req: Request): Promise<Response> => {
