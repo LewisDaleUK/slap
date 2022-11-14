@@ -1,6 +1,24 @@
 import { Activity, Object } from "../requests/index.ts";
 import * as Actor from "../actor/mod.ts";
 import * as Crypto from "../crypto/mod.ts";
+import { Values } from "https://deno.land/x/sqlite@v3.7.0/src/constants.ts";
+
+type SignatureHeaders = {
+	keyId: string;
+	signature: string;
+	algorithm: string;
+	headers: string; 
+};
+
+const extractSignature = (signature: string): SignatureHeaders => {
+	return signature.split(',').reduce((values, current) => {
+		const [key, value] = current.split("=", 2);
+		const [_, text] = value.split('"', 2);
+		values[key] = text;
+
+		return values;
+	}, {} as { [k: string]: string }) as SignatureHeaders;
+}
 
 const verify = async (req: Request, activity: Activity): Promise<boolean> => {
 	const url = new URL(activity.actor as string);
@@ -15,7 +33,7 @@ const verify = async (req: Request, activity: Activity): Promise<boolean> => {
 	const body = await response.json();
 
 	const key = await Crypto.Key.fromPem(body.publicKey.publicKeyPem as string, "public");
-	const signature = req.headers.get("signature") as string;
+	const signature = extractSignature(req.headers.get("signature") as string);
 
 	console.log(signature);
 	return false;
