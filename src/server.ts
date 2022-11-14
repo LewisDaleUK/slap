@@ -4,9 +4,8 @@ import { renderToString } from "./deps.ts";
 
 import * as Actor from "./actor/mod.ts";
 import * as Site from "./site/mod.ts";
-
-import { handler as publicFiles } from "./routes/public.ts";
-import { handler as webfinger } from "./routes/webfinger.ts";
+import * as Public from './public/mod.ts';
+import * as Webfinger from './webfinger/mod.ts';
 
 import Index from "./views/index.tsx";
 import Database from "./lib/Database.ts";
@@ -14,8 +13,8 @@ import Database from "./lib/Database.ts";
 type Handler = (req: Request, match: URLPatternResult) => Response | Promise<Response>;
 
 const routes: [URLPattern, Handler][] = [
-	[new URLPattern({ pathname: "/.well-known/webfinger", search: "(resource=)?:resource?" }), webfinger],
-	[new URLPattern({ pathname: "/public/*" }), publicFiles],
+	[new URLPattern({ pathname: "/.well-known/webfinger", search: "(resource=)?:resource?" }), Webfinger.router],
+	[new URLPattern({ pathname: "/public/*" }), Public.router],
 	[new URLPattern({ pathname: "/(@?):actor:path(/followers|/inbox|/outbox)?:ext(\.json)?" }), Actor.router],
 	[new URLPattern({ pathname: "/" }), () => new Response( new TextEncoder().encode(renderToString(Index)) )]
 ];

@@ -25,7 +25,7 @@ export default class Gateway implements IGateway<SiteDetails> {
 			.queryEntries<SiteDetails>(`SELECT * FROM site WHERE id = :id LIMIT 1`, { id })[0];
 	}
 
-	find(column: string, value: number | string): Maybe<SiteDetails> {
+	find(column: string, value: Maybe<number | string>): Maybe<SiteDetails> {
 		return this
 			._database
 			.queryEntries<SiteDetails>(`SELECT * FROM site WHERE ${column} = ? LIMIT 1`, [value])[0];

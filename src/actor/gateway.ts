@@ -36,7 +36,7 @@ export default class ActorGateway implements IGateway<Actor> {
 		);
 	}
 
-	async find(column: string, value: number | string): Promise<Maybe<Actor>> {
+	async find(column: string, value: Maybe<number | string>): Promise<Maybe<Actor>> {
 		return await this.map(
 			this._database.queryEntries<ActorEntity>(`SELECT * FROM actor WHERE ${column} = ? LIMIT 1`, [value])[0]
 		);

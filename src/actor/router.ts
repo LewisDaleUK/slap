@@ -1,4 +1,4 @@
-import { handler as inbox } from '../routes/inbox.ts';
+import * as Inbox from '../inbox/mod.ts';
 import ActorGateway from "./gateway.ts";
 import Profile from '../views/profile.tsx';
 import { Handler } from "../types.ts";
@@ -55,7 +55,7 @@ const actor: Handler = async (req, matches) : Promise<Response> => {
 
 const subroutes: [URLPattern, Handler][] = [
 	[new URLPattern({ pathname: "/followers" }), () => new Response("Followers page")],
-	[new URLPattern({ pathname: "/inbox" }), inbox],
+	[new URLPattern({ pathname: "/inbox" }), Inbox.router],
 ];
 
 export const handler = async (req: Request, matches: URLPatternResult) : Promise<Response> => {
