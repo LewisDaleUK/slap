@@ -10,6 +10,7 @@ export const handler = async (req: Request): Promise<Response> => {
 			switch (activity.type) {
 				case "Follow":
 					console.log(req);
+					console.log(activity);
 					// Verify request
 					// Send accept
 					// Store follower
