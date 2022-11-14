@@ -1,8 +1,8 @@
 import { assertEquals, assertExists } from "https://deno.land/std@0.163.0/testing/asserts.ts";
-import { KeyPair } from "../../src/crypto/index.ts";
-import ActorGateway from "../../src/gateways/Actor.ts";
-import Database from "../../src/lib/Database.ts";
-import { Actor } from "../../src/models/index.ts";
+import { KeyPair } from "../../crypto/index.ts";
+import Database from "../../lib/Database.ts";
+import ActorGateway from "../gateway.ts";
+import { Actor } from "../models.ts";
 
 Deno.test("ActorGateway", async (t) => {
 	const database = new Database(":memory:");

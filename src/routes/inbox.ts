@@ -9,6 +9,10 @@ export const handler = async (req: Request): Promise<Response> => {
 
 			switch (activity.type) {
 				case "Follow":
+					// Verify request
+					// Send accept
+					// Store follower
+
 					return new Response("Follow");
 				default:
 					return new Response(JSON.stringify(activity));

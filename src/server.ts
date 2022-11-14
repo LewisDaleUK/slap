@@ -2,7 +2,7 @@ import { serve } from "https://deno.land/std@0.162.0/http/server.ts";
 
 import { renderToString } from "./deps.ts";
 
-import { handler as actor } from "./routes/actor.ts";
+import * as Actor from "./actor/index.ts";
 import { handler as publicFiles } from "./routes/public.ts";
 import { handler as webfinger } from "./routes/webfinger.ts";
 
@@ -15,13 +15,13 @@ type Handler = (req: Request, match: URLPatternResult) => Response | Promise<Res
 const routes: [URLPattern, Handler][] = [
 	[new URLPattern({ pathname: "/.well-known/webfinger", search: "(resource=)?:resource?" }), webfinger],
 	[new URLPattern({ pathname: "/public/*" }), publicFiles],
-	[new URLPattern({ pathname: "/(@?):actor:path(/followers|/inbox|/outbox)?:ext(\.json)?" }), actor],
+	[new URLPattern({ pathname: "/(@?):actor:path(/followers|/inbox|/outbox)?:ext(\.json)?" }), Actor.router],
 	[new URLPattern({ pathname: "/" }), () => new Response( new TextEncoder().encode(renderToString(Index)) )]
 ];
 
 const handler = async (req: Request): Promise<Response> => {
 	console.log(`Received ${req.method} request to ${req.url}`);
-	
+
 	const route = routes.find(([matcher]) => matcher.test(req.url));
 
 	req.database = new Database("app.db");

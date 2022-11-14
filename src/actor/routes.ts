@@ -1,8 +1,7 @@
-import { handler as inbox } from './inbox.ts';
-import ActorGateway from "../gateways/Actor.ts";
+import { handler as inbox } from '../routes/inbox.ts';
+import ActorGateway from "./gateway.ts";
 import Profile from '../views/profile.tsx';
 import { Handler } from "../types.ts";
-
 
 const actor: Handler = async (req, matches) : Promise<Response> => {
 	const accept = req.headers.get("accept")?.includes("application/activity+json");

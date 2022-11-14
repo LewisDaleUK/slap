@@ -3,5 +3,3 @@ export type SiteDetails = {
 	domain: string;
 	title: string;
 }
-
-export { Actor, type ActorEntity } from './Actor.ts';

@@ -1,8 +1,9 @@
 
 import SiteDetailsGateway from "../gateways/SiteDetails.ts";
-import ActorGateway from "../gateways/Actor.ts";
+import * as Actor from "../actor/index.ts";
+
 import Database from "../lib/Database.ts";
-import { Actor, SiteDetails } from "../models/index.ts";
+import { SiteDetails } from "../models/index.ts";
 import { KeyPair } from "../crypto/index.ts";
 
 export const handler = async () => {
@@ -19,9 +20,9 @@ export const handler = async () => {
 	const preferred_username = prompt("What is your preferred username?");
 	const summary = prompt("Enter a brief summary of your profile");
 
-	const actor = new Actor(handle as string, preferred_username as string, await KeyPair.generate(), summary as string);
+	const actor = new Actor.Actor(handle as string, preferred_username as string, await KeyPair.generate(), summary as string);
 
-	await new ActorGateway(database).save(actor);
+	await new Actor.ActorGateway(database).save(actor);
 }
 
 await handler();

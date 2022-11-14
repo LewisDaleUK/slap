@@ -1,4 +1,4 @@
-import ActorGateway from "../gateways/Actor.ts";
+import { ActorGateway } from "../actor/index.ts";
 import SiteDetailsGateway from "../gateways/SiteDetails.ts";
 import type { Handler } from "../types.ts";
 
