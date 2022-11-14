@@ -31,7 +31,7 @@ const verify = async (req: Request, activity: Activity): Promise<boolean> => {
 		}
 	});
 	const body = await response.json();
-	const inboxFragment = `${req.actor?.handle}/inbox`;
+	const inboxFragment = `/${req.actor?.handle}/inbox`;
 
 	const key = await Crypto.Key.fromPem(body.publicKey.publicKeyPem as string, "public");
 	const signature = extractSignature(req.headers.get("signature") as string);

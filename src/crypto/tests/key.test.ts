@@ -56,4 +56,5 @@ Deno.test("Can decode PEM from external source", async (t) => {
 	const keyPem = "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzasvy2Md90rEdFUhhQwm\nI2vj4zyJwiLdsJztacG1pNNbEbxwZFylJc4o30rOTqQ/jr5tGNPnJqxe0gOP49QV\nBRRIl2/0IP09JqyjmGNhjIi/FNAh+kntgYsxnUvQNPpYp0bqKfffIOFLBEwSfrxp\nCTS4g2zQARlaj85XaAXTawHH034bSlN9esuO6xvXY84XJK0gsHSluUvbw3mDBawp\nijXBVWi0xWRbNd7Sghkva9HfVwooPoMAWnyB8tVhtK7i8whlO9mU1WO6Hyecb9PQ\ncFSYhyZi0u94yVaJRptwQiBZ5uq+DFL2/tkhea3Sf6VXR9mzGvvzWEj0vAhoQERb\nRwIDAQAB\n-----END PUBLIC KEY-----\n";
 
 	const key = await Key.fromPem(keyPem, "public");
+	assertStringIncludes(keyPem, await key.toPem());
 })
