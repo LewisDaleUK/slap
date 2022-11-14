@@ -38,6 +38,7 @@ const verify = async (req: Request, activity: Activity): Promise<boolean> => {
 	const expected = `(request-target): post ${inboxFragment}\nhost: ${req.site.domain}\ndate: ${req.headers.get("date")}\ndigest: ${req.headers.get("digest")}`
 
 	console.log(signature, expected);
+	console.log(await key.verify(signature.signature, expected));
 	return false;
 }
 
