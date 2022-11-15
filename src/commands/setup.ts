@@ -20,11 +20,13 @@ export const handler = async () => {
 	const summary = prompt("Enter a brief summary of your profile");
 
 	const actor = new Actor.Model(
-		handle as string,
-		preferred_username as string,
 		await KeyPair.generate(),
-		summary as string
 	);
+
+	actor.handle = handle as string;
+	actor.preferred_username = preferred_username as string;
+	actor.external = false;
+	actor.summary = summary as string;
 
 	await new Actor.Gateway(database).save(actor);
 }

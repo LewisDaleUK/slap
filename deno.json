@@ -1,7 +1,11 @@
 {
 	"compilerOptions": {
 		"jsx": "react-jsx",
-		"jsxImportSource": "https://esm.sh/preact"
+		"jsxImportSource": "https://esm.sh/preact",
+		"lib": [
+			"dom",
+			"deno.ns"
+		]
 	},
 	"importMap": "import-map.json",
 	"tasks": {
