@@ -13,12 +13,18 @@ Deno.test("ActorGateway", async (t) => {
 	});
 
 	let actorId: number;
-	const actor = new Actor(
-		"username",
-		"Display Name",
-		await KeyPair.generate(),
-		"A summary",
-	);
+	const actor = await Actor.from({
+		handle: "My handle",
+		preferred_username: "My preferred username",
+		followers: null,
+		following: null,
+		private_key_pem: undefined,
+		public_key_pem: undefined,
+		external: false,
+		inbox: null,
+		outbox: null,
+		domain: null,
+	});
 
 	await t.step("Add a new actor", async () => {
 		const id = await gateway.save(actor);

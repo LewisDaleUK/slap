@@ -72,10 +72,10 @@ export class Key {
 }
 
 export class KeyPair {
-	public privateKey: Key;
-	public publicKey: Key;
+	public privateKey?: Key;
+	public publicKey?: Key;
 
-	constructor(privateKey: Key, publicKey: Key) {
+	constructor(privateKey?: Key, publicKey?: Key) {
 		this.privateKey = privateKey;
 		this.publicKey = publicKey;
 	}

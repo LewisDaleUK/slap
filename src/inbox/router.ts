@@ -1,5 +1,4 @@
 import { Activity } from "../requests/index.ts";
-import * as Actor from "../actor/mod.ts";
 import * as Crypto from "../crypto/mod.ts";
 
 type SignatureHeaders = {
@@ -77,9 +76,7 @@ const sendAcceptMessage = async (req: Request, activity: Activity): Promise<void
 		"content-type": "application/activity+json"
 	};
 
-	console.log(signatureHeaders);
-	
-	const signature = await req.actor?.keys.privateKey.sign(headersToSignature(signatureHeaders));
+	const signature = await req.actor?.keys.privateKey?.sign(headersToSignature(signatureHeaders));
 	const header = `keyId="https://${req.site.domain}/${req.actor?.handle}",headers="(request-target) host date digest content-type",signature="${signature}"`;
 	const headers = {
 		Signature: header,
@@ -89,21 +86,16 @@ const sendAcceptMessage = async (req: Request, activity: Activity): Promise<void
 		"Content-Type": signatureHeaders["content-type"],
 	};
 
-	console.log(headers);
-
-	const res = await fetch(inbox, {
+	await fetch(inbox, {
 		headers,
 		method: "POST",
 		body: JSON.stringify(createMessage)
 	});
 
-	console.log(res);
-	console.log(await res.text());
 }
 
 export const handler = async (req: Request): Promise<Response> => {
 	let activity: Activity;
-	const actor = req.actor as Actor.Model;
 
 	switch (req.method) {
 		case "POST":

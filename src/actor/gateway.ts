@@ -11,6 +11,8 @@ export default class ActorGateway implements IGateway<Actor> {
 
 	private async map(row?: ActorEntity): Promise<Maybe<Actor>> {
 		if (row) {
+			// SQlite returns booleans as integers - force value to be a bool
+			row.external = !!row.external;
 			return await Actor.from(row);
 		}
 
@@ -24,8 +26,14 @@ export default class ActorGateway implements IGateway<Actor> {
 				handle TEXT NOT NULL,
 				preferred_username TEXT NOT NULL,
 				summary TEXT NOT NULL DEFAULT "",
-				public_key_pem TEXT NOT NULL,
-				private_key_pem TEXT NOT NULL
+				public_key_pem TEXT,
+				private_key_pem TEXT,
+				external BOOLEAN NOT NULL DEFAULT FALSE,
+				inbox TEXT,
+				outbox TEXT,
+				followers TEXT,
+				following TEXT,
+				domain TEXT
 			)`
 		);
 	}
@@ -56,18 +64,45 @@ export default class ActorGateway implements IGateway<Actor> {
 					preferred_username = :preferred_username,
 					summary = :summary,
 					private_key_pem = :private_key_pem,
-					public_key_pem = :public_key_pem
+					public_key_pem = :public_key_pem,
+					external = :external,
+					domain = :domain,
+					inbox = :inbox,
+					outbox = :outbox,
+					followers = :followers,
+					following = :following
 				WHERE id = :id`,
 				entity
 			);
 			return item.id;
 		}
 
-		console.log(await item.entity());
 		this._database.query<ActorEntity[]>(
-			`INSERT INTO actor
-				(handle, preferred_username, summary, public_key_pem, private_key_pem)
-			VALUES (:handle, :preferred_username, :summary, :public_key_pem, :private_key_pem)`,
+			`INSERT INTO actor (
+				handle,
+				preferred_username,
+				summary,
+				public_key_pem,
+				private_key_pem,
+				external,
+				domain,
+				inbox,
+				outbox,
+				followers,
+				following
+			) VALUES (
+				:handle,
+				:preferred_username,
+				:summary,
+				:public_key_pem,
+				:private_key_pem,
+				:external,
+				:domain,
+				:inbox,
+				:outbox,
+				:followers,
+				:following
+			)`,
 			entity,
 		);
 		return this._database.lastInsertRowId;

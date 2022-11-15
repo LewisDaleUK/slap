@@ -43,7 +43,7 @@ const actor: Handler = async (req, matches) : Promise<Response> => {
 		"publicKey": {
 			"id": `${actorUri}#main-key`,
 			"owner": actorUri,
-			"publicKeyPem": await actor.keys.publicKey.toPem(),
+			"publicKeyPem": await actor.keys.publicKey?.toPem(),
 		}
 	};
 
@@ -64,10 +64,15 @@ export const handler = async (req: Request, matches: URLPatternResult) : Promise
 		});
 	}
 
-	const route = subroutes.find(([matcher]) => matcher.test(`.${matches.pathname.groups.path}`, `https://${req.site.domain}`));
+	const route = subroutes.find(([matcher]) =>
+		matcher.test(`.${matches.pathname.groups.path}`, `https://${req.site.domain}`)
+	);
 
 	if (route) {
-		return route[1](req, route[0].exec(`.${matches.pathname.groups.path}`, `https://${req.site.domain}`) as URLPatternResult);
+		return route[1](
+			req,
+			route[0].exec(`.${matches.pathname.groups.path}`, `https://${req.site.domain}`) as URLPatternResult
+		);
 	}
 
 	return await actor(req, matches);

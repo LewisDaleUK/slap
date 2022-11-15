@@ -19,7 +19,7 @@ declare global {
 	interface Request {
 		database: Database;
 		site: Site.Model;
-		actor?: Actor.Model;
+		actor: Maybe<Actor.Model>;
 	}
 
 }
