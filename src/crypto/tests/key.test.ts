@@ -12,23 +12,23 @@ Deno.test("Convert a key to PEM and back again", async (t) => {
 	let privatePem: string;
 
 	await t.step("Convert keys to PEM", async () => {
-		publicPem = await keypair.publicKey.toPem();
+		publicPem = await keypair.publicKey?.toPem() as string;
 		assertStringIncludes(publicPem, "BEGIN PUBLIC KEY");
 
-		privatePem = await keypair.privateKey.toPem()
+		privatePem = await keypair.privateKey?.toPem() as string;
 		assertStringIncludes(privatePem, "BEGIN PRIVATE KEY");
 	});
 
 	await t.step("Convert private key back", async () => {
 		const key = await Key.fromPem(privatePem, "private");
 
-		assertEquals(key.toPem(), keypair.privateKey.toPem());
+		assertEquals(key.toPem(), keypair.privateKey?.toPem());
 	});
 
 	await t.step("Convert public key back", async () => {
 		const key = await Key.fromPem(publicPem, "public");
 
-		assertEquals(key.toPem(), keypair.publicKey.toPem());
+		assertEquals(key.toPem(), keypair.publicKey?.toPem());
 	});
 });
 
@@ -43,11 +43,11 @@ Deno.test("Verify certificate", async (t) => {
 	let signature: string;
 
 	await t.step("Sign key", async () => {
-		signature = await keypair.privateKey.sign(secret);
+		signature = await keypair.privateKey?.sign(secret) as string;
 	});
 
 	await t.step("Verify signature", async () => {
-		const verified = await keypair.publicKey.verify(signature, secret);
+		const verified = await keypair.publicKey?.verify(signature, secret);
 		assert(verified);
 	});
 });
