@@ -1,3 +1,6 @@
+/// <reference no-default-lib="true"/>
+/// <reference lib="dom" />
+/// <reference lib="deno.ns" />
 import { FunctionComponent } from "https://esm.sh/v96/preact@10.11.2/src/index.d.ts";
 
 const Layout: FunctionComponent = ({ children }) => (

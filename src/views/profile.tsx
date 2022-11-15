@@ -1,3 +1,6 @@
+/// <reference no-default-lib="true"/>
+/// <reference lib="dom" />
+/// <reference lib="deno.ns" />
 import { FunctionComponent } from 'preact';
 import render from "preact-render-to-string";
 import * as Actor from '../actor/mod.ts';

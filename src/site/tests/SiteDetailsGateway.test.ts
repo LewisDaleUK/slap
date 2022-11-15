@@ -1,4 +1,4 @@
-import { assertEquals, assertExists } from "https://deno.land/std@0.163.0/testing/asserts.ts";
+import { assertEquals, assertExists } from "https://deno.land/std@0.164.0/testing/asserts.ts";
 import Gateway from "../gateway.ts";
 import Database from "../../lib/Database.ts";
 

@@ -1,4 +1,4 @@
-import { assert, assertEquals, assertStringIncludes } from "https://deno.land/std@0.163.0/testing/asserts.ts";
+import { assert, assertEquals, assertStringIncludes } from "https://deno.land/std@0.164.0/testing/asserts.ts";
 import { Key, KeyPair } from "../key.ts";
 
 Deno.test("Convert a key to PEM and back again", async (t) => {

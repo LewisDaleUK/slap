@@ -1,4 +1,4 @@
-import { decode as base64Decode } from 'https://deno.land/std@0.162.0/encoding/base64.ts';
+import { decode as base64Decode } from 'https://deno.land/std@0.164.0/encoding/base64.ts';
 
 /**
  * Class for decoding/encoding between different data formats.

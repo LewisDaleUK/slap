@@ -1,0 +1,825 @@
+[0m[32mDownload[0m https://deno.land/std@0.164.0/testing/asserts.ts
+[0m[32mDownload[0m https://deno.land/x/sqlite@v3.7.0/mod.ts
+[0m[32mDownload[0m https://deno.land/std@0.164.0/encoding/base64.ts
+[0m[32mDownload[0m https://esm.sh/preact/jsx-runtime
+[0m[32mDownload[0m https://esm.sh/preact@10.11.3
+[0m[32mDownload[0m https://esm.sh/preact-render-to-string@5.2.5?deps=preact@10.11.3
+[0m[32mDownload[0m https://esm.sh/v96/preact@10.11.2/src/index.d.ts
+[0m[32mDownload[0m https://deno.land/x/sqlite@v3.7.0/build/sqlite.js
+[0m[32mDownload[0m https://deno.land/x/sqlite@v3.7.0/src/constants.ts
+[0m[32mDownload[0m https://deno.land/x/sqlite@v3.7.0/src/db.ts
+[0m[32mDownload[0m https://deno.land/x/sqlite@v3.7.0/src/error.ts
+[0m[32mDownload[0m https://deno.land/x/sqlite@v3.7.0/src/function.ts
+[0m[32mDownload[0m https://deno.land/x/sqlite@v3.7.0/src/query.ts
+[0m[32mDownload[0m https://deno.land/std@0.164.0/fmt/colors.ts
+[0m[32mDownload[0m https://deno.land/std@0.164.0/testing/_diff.ts
+[0m[32mDownload[0m https://deno.land/std@0.164.0/testing/_format.ts
+[0m[32mDownload[0m https://deno.land/x/sqlite@v3.7.0/src/wasm.ts
+[0m[32mDownload[0m https://deno.land/x/sqlite@v3.7.0/build/vfs.js
+[0m[32mDownload[0m https://deno.land/x/sqlite@v3.7.0/build/sqlite.d.ts
+[0m[32mDownload[0m https://esm.sh/preact@10.11.3/jsx-runtime
+[0m[32mDownload[0m https://esm.sh/stable/preact@10.11.3/deno/preact.js
+[0m[32mDownload[0m https://esm.sh/v98/preact@10.11.3/src/index.d.ts
+[0m[32mDownload[0m https://esm.sh/v96/preact@10.11.2/src/jsx.d.ts
+[0m[32mDownload[0m https://esm.sh/v98/preact-render-to-string@5.2.5/X-ZC9wcmVhY3RAMTAuMTEuMw/deno/preact-render-to-string.js
+[0m[32mDownload[0m https://esm.sh/v98/preact-render-to-string@5.2.5/X-ZC9wcmVhY3RAMTAuMTEuMw/src/index.d.ts
+[0m[32mDownload[0m https://esm.sh/stable/preact@10.11.3/deno/jsx-runtime.js
+[0m[32mDownload[0m https://esm.sh/v98/preact@10.11.3/jsx-runtime/src/index.d.ts
+[0m[32mDownload[0m https://esm.sh/v98/preact@10.11.3/src/jsx.d.ts
+[0m[32mCheck[0m file:///Users/lewis/development/personal/slap/src/actor/tests/ActorGateway.test.ts
+[0m[32mCheck[0m file:///Users/lewis/development/personal/slap/src/crypto/tests/key.test.ts
+[0m[32mCheck[0m file:///Users/lewis/development/personal/slap/src/site/tests/SiteDetailsGateway.test.ts
+[0m[1m[31merror[0m: [0m[1mTS6200 [0m[ERROR]: Definitions of the following identifiers conflict with those in another file: CompileError, Global, Instance, LinkError, Memory, Module, RuntimeError, Table, ImportExportKind, TableKind, ValueType, ExportValue, Exports, ImportValue, ModuleImports, Imports, BufferSource, ErrorEvent, PromiseRejectionEvent, Worker, PerformanceEntryList, Performance, PerformanceEntry, PerformanceMark, PerformanceMeasure, CustomEvent
+interface AddEventListenerOptions extends EventListenerOptions {
+[0m[31m~~~~~~~~~[0m
+    at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m26[0m:[0m[33m1[0m
+
+    Conflicts are in this file.
+    declare namespace WebAssembly {
+    [0m[36m~~~~~~~[0m
+        at [0m[36masset:///lib.deno.shared_globals.d.ts[0m:[0m[33m17[0m:[0m[33m1[0m
+
+[0m[1mTS6200 [0m[ERROR]: Definitions of the following identifiers conflict with those in another file: DOMException, Event, EventTarget, EventListenerOrEventListenerObject, ProgressEvent, AbortController, BlobPart, Blob, File, ReadableStreamReadResult, ReadableStreamReader, size, MessageEvent, Transferable, MessageChannel, MessagePort
+interface AddEventListenerOptions extends EventListenerOptions {
+[0m[31m~~~~~~~~~[0m
+    at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m26[0m:[0m[33m1[0m
+
+    Conflicts are in this file.
+    declare class DOMException extends Error {
+    [0m[36m~~~~~~~[0m
+        at [0m[36masset:///lib.deno.web.d.ts[0m:[0m[33m9[0m:[0m[33m1[0m
+
+[0m[1mTS6200 [0m[ERROR]: Definitions of the following identifiers conflict with those in another file: FormDataEntryValue, HeadersInit, Headers, RequestInfo, RequestCache, RequestCredentials, RequestMode, RequestRedirect, ReferrerPolicy, BodyInit, RequestDestination, Request, ResponseType, Response
+interface AddEventListenerOptions extends EventListenerOptions {
+[0m[31m~~~~~~~~~[0m
+    at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m26[0m:[0m[33m1[0m
+
+    Conflicts are in this file.
+    interface DomIterable<K, V> {
+    [0m[36m~~~~~~~~~[0m
+        at [0m[36masset:///lib.deno.fetch.d.ts[0m:[0m[33m9[0m:[0m[33m1[0m
+
+[0m[1mTS2428 [0m[ERROR]: All declarations of 'ReadableStreamReadDoneResult' must have identical type parameters.
+interface ReadableStreamReadDoneResult {
+[0m[31m          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m1509[0m:[0m[33m11[0m
+
+[0m[1mTS2687 [0m[ERROR]: All declarations of 'read' must have identical modifiers.
+    read?: number;
+[0m[31m    ~~~~[0m
+    at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m1737[0m:[0m[33m5[0m
+
+[0m[1mTS2687 [0m[ERROR]: All declarations of 'written' must have identical modifiers.
+    written?: number;
+[0m[31m    ~~~~~~~[0m
+    at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m1738[0m:[0m[33m5[0m
+
+[0m[1mTS2687 [0m[ERROR]: All declarations of 'highWaterMark' must have identical modifiers.
+    readonly highWaterMark: number;
+[0m[31m             ~~~~~~~~~~~~~[0m
+    at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m2543[0m:[0m[33m14[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'CloseEvent'.
+interface CloseEvent extends Event {
+[0m[31m          ~~~~~~~~~~[0m
+    at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m3639[0m:[0m[33m11[0m
+
+    'CloseEvent' was also declared here.
+    declare class CloseEvent extends Event {
+    [0m[36m              ~~~~~~~~~~[0m
+        at [0m[36masset:///lib.deno.websocket.d.ts[0m:[0m[33m16[0m:[0m[33m15[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'CloseEvent'.
+declare var CloseEvent: {
+[0m[31m            ~~~~~~~~~~[0m
+    at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m3648[0m:[0m[33m13[0m
+
+    'CloseEvent' was also declared here.
+    declare class CloseEvent extends Event {
+    [0m[36m              ~~~~~~~~~~[0m
+        at [0m[36masset:///lib.deno.websocket.d.ts[0m:[0m[33m16[0m:[0m[33m15[0m
+
+[0m[1mTS2687 [0m[ERROR]: All declarations of 'highWaterMark' must have identical modifiers.
+    readonly highWaterMark: number;
+[0m[31m             ~~~~~~~~~~~~~[0m
+    at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m3700[0m:[0m[33m14[0m
+
+[0m[1mTS2374 [0m[ERROR]: Duplicate index signature for type 'number'.
+    [index: number]: string;
+[0m[31m    ~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m4089[0m:[0m[33m5[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'Location'.
+interface Location {
+[0m[31m          ~~~~~~~~[0m
+    at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m9045[0m:[0m[33m11[0m
+
+    'Location' was also declared here.
+    declare class Location {
+    [0m[36m              ~~~~~~~~[0m
+        at [0m[36masset:///lib.deno.window.d.ts[0m:[0m[33m204[0m:[0m[33m15[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'Location'.
+declare var Location: {
+[0m[31m            ~~~~~~~~[0m
+    at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m9107[0m:[0m[33m13[0m
+
+    'Location' was also declared here.
+    declare class Location {
+    [0m[36m              ~~~~~~~~[0m
+        at [0m[36masset:///lib.deno.window.d.ts[0m:[0m[33m204[0m:[0m[33m15[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'Navigator'.
+    at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m9837[0m:[0m[33m11[0m
+
+    'Navigator' was also declared here.
+    declare class Navigator {
+    [0m[36m              ~~~~~~~~~[0m
+        at [0m[36masset:///lib.deno.window.d.ts[0m:[0m[33m95[0m:[0m[33m15[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'Navigator'.
+declare var Navigator: {
+[0m[31m            ~~~~~~~~~[0m
+    at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m9863[0m:[0m[33m13[0m
+
+    'Navigator' was also declared here.
+    declare class Navigator {
+    [0m[36m              ~~~~~~~~~[0m
+        at [0m[36masset:///lib.deno.window.d.ts[0m:[0m[33m95[0m:[0m[33m15[0m
+
+[0m[1mTS2430 [0m[ERROR]: Interface 'ReadableStreamBYOBReader' incorrectly extends interface 'ReadableStreamGenericReader'.
+  Types of property 'closed' are incompatible.
+    Type 'Promise<void>' is not assignable to type 'Promise<undefined>'.
+      Type 'void' is not assignable to type 'undefined'.
+interface ReadableStreamBYOBReader extends ReadableStreamGenericReader {
+[0m[31m          ~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m11400[0m:[0m[33m11[0m
+
+[0m[1mTS2430 [0m[ERROR]: Interface 'ReadableStreamDefaultReader<R>' incorrectly extends interface 'ReadableStreamGenericReader'.
+  Types of property 'closed' are incompatible.
+    Type 'Promise<void>' is not assignable to type 'Promise<undefined>'.
+interface ReadableStreamDefaultReader<R = any> extends ReadableStreamGenericReader {
+[0m[31m          ~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m11433[0m:[0m[33m11[0m
+
+[0m[1mTS2374 [0m[ERROR]: Duplicate index signature for type 'string'.
+    [name: string]: any;
+[0m[31m    ~~~~~~~~~~~~~~~~~~~~[0m
+    at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m13763[0m:[0m[33m5[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'URL'.
+interface URL {
+[0m[31m          ~~~[0m
+    at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m14270[0m:[0m[33m11[0m
+
+    'URL' was also declared here.
+    declare class URL {
+    [0m[36m              ~~~[0m
+        at [0m[36masset:///lib.deno.url.d.ts[0m:[0m[33m160[0m:[0m[33m15[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'URL'.
+declare var URL: {
+[0m[31m            ~~~[0m
+    at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m14287[0m:[0m[33m13[0m
+
+    'URL' was also declared here.
+    declare class URL {
+    [0m[36m              ~~~[0m
+        at [0m[36masset:///lib.deno.url.d.ts[0m:[0m[33m160[0m:[0m[33m15[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'URLSearchParams'.
+interface URLSearchParams {
+[0m[31m          ~~~~~~~~~~~~~~~[0m
+    at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m14297[0m:[0m[33m11[0m
+
+    'URLSearchParams' was also declared here.
+    declare class URLSearchParams {
+    [0m[36m              ~~~~~~~~~~~~~~~[0m
+        at [0m[36masset:///lib.deno.url.d.ts[0m:[0m[33m9[0m:[0m[33m15[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'URLSearchParams'.
+declare var URLSearchParams: {
+[0m[31m            ~~~~~~~~~~~~~~~[0m
+    at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m14316[0m:[0m[33m13[0m
+
+    'URLSearchParams' was also declared here.
+    declare class URLSearchParams {
+    [0m[36m              ~~~~~~~~~~~~~~~[0m
+        at [0m[36masset:///lib.deno.url.d.ts[0m:[0m[33m9[0m:[0m[33m15[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'WebSocket'.
+interface WebSocket extends EventTarget {
+[0m[31m          ~~~~~~~~~[0m
+    at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m16470[0m:[0m[33m11[0m
+
+    'WebSocket' was also declared here.
+    declare class WebSocket extends EventTarget {
+    [0m[36m              ~~~~~~~~~[0m
+        at [0m[36masset:///lib.deno.websocket.d.ts[0m:[0m[33m50[0m:[0m[33m15[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'WebSocket'.
+declare var WebSocket: {
+[0m[31m            ~~~~~~~~~[0m
+    at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m16509[0m:[0m[33m13[0m
+
+    'WebSocket' was also declared here.
+    declare class WebSocket extends EventTarget {
+    [0m[36m              ~~~~~~~~~[0m
+        at [0m[36masset:///lib.deno.websocket.d.ts[0m:[0m[33m50[0m:[0m[33m15[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'Window'.
+    at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m16547[0m:[0m[33m11[0m
+
+    'Window' was also declared here.
+    declare class Window extends EventTarget {
+    [0m[36m              ~~~~~~[0m
+        at [0m[36masset:///lib.deno.window.d.ts[0m:[0m[33m18[0m:[0m[33m15[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'Window'.
+declare var Window: {
+[0m[31m            ~~~~~~[0m
+    at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m16668[0m:[0m[33m13[0m
+
+    'Window' was also declared here.
+    declare class Window extends EventTarget {
+    [0m[36m              ~~~~~~[0m
+        at [0m[36masset:///lib.deno.window.d.ts[0m:[0m[33m18[0m:[0m[33m15[0m
+
+[0m[1mTS2687 [0m[ERROR]: All declarations of 'signal' must have identical modifiers.
+    readonly signal: AbortSignal;
+[0m[31m             ~~~~~~[0m
+    at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m16807[0m:[0m[33m14[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'AlgorithmIdentifier'.
+type AlgorithmIdentifier = Algorithm | string;
+[0m[31m     ~~~~~~~~~~~~~~~~~~~[0m
+    at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m18057[0m:[0m[33m6[0m
+
+    'AlgorithmIdentifier' was also declared here.
+    type AlgorithmIdentifier = string | Algorithm;
+    [0m[36m     ~~~~~~~~~~~~~~~~~~~[0m
+        at [0m[36masset:///lib.deno.crypto.d.ts[0m:[0m[33m22[0m:[0m[33m6[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'HashAlgorithmIdentifier'.
+type HashAlgorithmIdentifier = AlgorithmIdentifier;
+[0m[31m     ~~~~~~~~~~~~~~~~~~~~~~~[0m
+    at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m18091[0m:[0m[33m6[0m
+
+    'HashAlgorithmIdentifier' was also declared here.
+    type HashAlgorithmIdentifier = AlgorithmIdentifier;
+    [0m[36m     ~~~~~~~~~~~~~~~~~~~~~~~[0m
+        at [0m[36masset:///lib.deno.crypto.d.ts[0m:[0m[33m24[0m:[0m[33m6[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'NamedCurve'.
+type NamedCurve = string;
+[0m[31m     ~~~~~~~~~~[0m
+    at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m18101[0m:[0m[33m6[0m
+
+    'NamedCurve' was also declared here.
+    type NamedCurve = string;
+    [0m[36m     ~~~~~~~~~~[0m
+        at [0m[36masset:///lib.deno.crypto.d.ts[0m:[0m[33m40[0m:[0m[33m6[0m
+
+[0m[1mTS2314 [0m[ERROR]: Generic type 'ReadableStreamReadDoneResult<T>' requires 1 type argument(s).
+type ReadableStreamReadResult<T> = ReadableStreamReadValueResult<T> | ReadableStreamReadDoneResult;
+[0m[31m                                                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m18106[0m:[0m[33m71[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'BinaryType'.
+type BinaryType = "arraybuffer" | "blob";
+[0m[31m     ~~~~~~~~~~[0m
+    at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m18130[0m:[0m[33m6[0m
+
+    'BinaryType' was also declared here.
+    type BinaryType = "arraybuffer" | "blob";
+    [0m[36m     ~~~~~~~~~~[0m
+        at [0m[36masset:///lib.deno.websocket.d.ts[0m:[0m[33m125[0m:[0m[33m6[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'KeyFormat'.
+type KeyFormat = "jwk" | "pkcs8" | "raw" | "spki";
+[0m[31m     ~~~~~~~~~[0m
+    at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m18175[0m:[0m[33m6[0m
+
+    'KeyFormat' was also declared here.
+    type KeyFormat = "jwk" | "pkcs8" | "raw" | "spki";
+    [0m[36m     ~~~~~~~~~[0m
+        at [0m[36masset:///lib.deno.crypto.d.ts[0m:[0m[33m38[0m:[0m[33m6[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'KeyType'.
+type KeyType = "private" | "public" | "secret";
+[0m[31m     ~~~~~~~[0m
+    at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m18176[0m:[0m[33m6[0m
+
+    'KeyType' was also declared here.
+    type KeyType = "private" | "public" | "secret";
+    [0m[36m     ~~~~~~~[0m
+        at [0m[36masset:///lib.deno.crypto.d.ts[0m:[0m[33m26[0m:[0m[33m6[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'KeyUsage'.
+type KeyUsage = "decrypt" | "deriveBits" | "deriveKey" | "encrypt" | "sign" | "unwrapKey" | "verify" | "wrapKey";
+[0m[31m     ~~~~~~~~[0m
+    at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m18177[0m:[0m[33m6[0m
+
+    'KeyUsage' was also declared here.
+    type KeyUsage =
+    [0m[36m     ~~~~~~~~[0m
+        at [0m[36masset:///lib.deno.crypto.d.ts[0m:[0m[33m28[0m:[0m[33m6[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'URLPatternInput'.
+declare type URLPatternInput = string | URLPatternInit;
+[0m[31m             ~~~~~~~~~~~~~~~[0m
+    at [0m[36masset:///lib.dom.extras.d.ts[0m:[0m[33m22[0m:[0m[33m14[0m
+
+    'URLPatternInput' was also declared here.
+    declare type URLPatternInput = string | URLPatternInit;
+    [0m[36m             ~~~~~~~~~~~~~~~[0m
+        at [0m[36masset:///lib.deno.url.d.ts[0m:[0m[33m195[0m:[0m[33m14[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'URLPattern'.
+declare class URLPattern {
+[0m[31m              ~~~~~~~~~~[0m
+    at [0m[36masset:///lib.dom.extras.d.ts[0m:[0m[33m80[0m:[0m[33m15[0m
+
+    'URLPattern' was also declared here.
+    declare class URLPattern {
+    [0m[36m              ~~~~~~~~~~[0m
+        at [0m[36masset:///lib.deno.url.d.ts[0m:[0m[33m259[0m:[0m[33m15[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'Window'.
+declare class Window extends EventTarget {
+[0m[31m              ~~~~~~[0m
+    at [0m[36masset:///lib.deno.window.d.ts[0m:[0m[33m18[0m:[0m[33m15[0m
+
+    'Window' was also declared here.
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m16547[0m:[0m[33m11[0m    and here.
+    declare var Window: {
+    [0m[36m            ~~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m16668[0m:[0m[33m13[0m
+
+[0m[1mTS2403 [0m[ERROR]: Subsequent variable declarations must have the same type.  Variable 'onerror' must be of type 'OnErrorEventHandler', but here has type '((this: Window, ev: ErrorEvent) => any) | null'.
+declare var onerror: ((this: Window, ev: ErrorEvent) => any) | null;
+[0m[31m            ~~~~~~~[0m
+    at [0m[36masset:///lib.deno.window.d.ts[0m:[0m[33m76[0m:[0m[33m13[0m
+
+    'onerror' was also declared here.
+    declare var onerror: OnErrorEventHandler;
+    [0m[36m            ~~~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m17832[0m:[0m[33m13[0m
+
+[0m[1mTS2403 [0m[ERROR]: Subsequent variable declarations must have the same type.  Variable 'onbeforeunload' must be of type '((this: Window, ev: BeforeUnloadEvent) => any) | null', but here has type '((this: Window, ev: Event) => any) | null'.
+declare var onbeforeunload: ((this: Window, ev: Event) => any) | null;
+[0m[31m            ~~~~~~~~~~~~~~[0m
+    at [0m[36masset:///lib.deno.window.d.ts[0m:[0m[33m80[0m:[0m[33m13[0m
+
+    'onbeforeunload' was also declared here.
+    declare var onbeforeunload: ((this: Window, ev: BeforeUnloadEvent) => any) | null;
+    [0m[36m            ~~~~~~~~~~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m18015[0m:[0m[33m13[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'Navigator'.
+declare class Navigator {
+[0m[31m              ~~~~~~~~~[0m
+    at [0m[36masset:///lib.deno.window.d.ts[0m:[0m[33m95[0m:[0m[33m15[0m
+
+    'Navigator' was also declared here.
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m9837[0m:[0m[33m11[0m    and here.
+    declare var Navigator: {
+    [0m[36m            ~~~~~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m9863[0m:[0m[33m13[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'Location'.
+declare class Location {
+[0m[31m              ~~~~~~~~[0m
+    at [0m[36masset:///lib.deno.window.d.ts[0m:[0m[33m204[0m:[0m[33m15[0m
+
+    'Location' was also declared here.
+    interface Location {
+    [0m[36m          ~~~~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m9045[0m:[0m[33m11[0m    and here.
+    declare var Location: {
+    [0m[36m            ~~~~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m9107[0m:[0m[33m13[0m
+
+[0m[1mTS6200 [0m[ERROR]: Definitions of the following identifiers conflict with those in another file: CompileError, Global, Instance, LinkError, Memory, Module, RuntimeError, Table, ImportExportKind, TableKind, ValueType, ExportValue, Exports, ImportValue, ModuleImports, Imports, BufferSource, ErrorEvent, PromiseRejectionEvent, Worker, PerformanceEntryList, Performance, PerformanceEntry, PerformanceMark, PerformanceMeasure, CustomEvent
+declare namespace WebAssembly {
+[0m[31m~~~~~~~[0m
+    at [0m[36masset:///lib.deno.shared_globals.d.ts[0m:[0m[33m17[0m:[0m[33m1[0m
+
+    Conflicts are in this file.
+    interface AddEventListenerOptions extends EventListenerOptions {
+    [0m[36m~~~~~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m26[0m:[0m[33m1[0m
+
+[0m[1mTS2374 [0m[ERROR]: Duplicate index signature for type 'number'.
+  [index: number]: string;
+[0m[31m  ~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    at [0m[36masset:///lib.deno.shared_globals.d.ts[0m:[0m[33m453[0m:[0m[33m3[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'AlgorithmIdentifier'.
+type AlgorithmIdentifier = string | Algorithm;
+[0m[31m     ~~~~~~~~~~~~~~~~~~~[0m
+    at [0m[36masset:///lib.deno.crypto.d.ts[0m:[0m[33m22[0m:[0m[33m6[0m
+
+    'AlgorithmIdentifier' was also declared here.
+    type AlgorithmIdentifier = Algorithm | string;
+    [0m[36m     ~~~~~~~~~~~~~~~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m18057[0m:[0m[33m6[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'HashAlgorithmIdentifier'.
+type HashAlgorithmIdentifier = AlgorithmIdentifier;
+[0m[31m     ~~~~~~~~~~~~~~~~~~~~~~~[0m
+    at [0m[36masset:///lib.deno.crypto.d.ts[0m:[0m[33m24[0m:[0m[33m6[0m
+
+    'HashAlgorithmIdentifier' was also declared here.
+    type HashAlgorithmIdentifier = AlgorithmIdentifier;
+    [0m[36m     ~~~~~~~~~~~~~~~~~~~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m18091[0m:[0m[33m6[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'KeyType'.
+type KeyType = "private" | "public" | "secret";
+[0m[31m     ~~~~~~~[0m
+    at [0m[36masset:///lib.deno.crypto.d.ts[0m:[0m[33m26[0m:[0m[33m6[0m
+
+    'KeyType' was also declared here.
+    type KeyType = "private" | "public" | "secret";
+    [0m[36m     ~~~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m18176[0m:[0m[33m6[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'KeyUsage'.
+type KeyUsage =
+[0m[31m     ~~~~~~~~[0m
+    at [0m[36masset:///lib.deno.crypto.d.ts[0m:[0m[33m28[0m:[0m[33m6[0m
+
+    'KeyUsage' was also declared here.
+    type KeyUsage = "decrypt" | "deriveBits" | "deriveKey" | "encrypt" | "sign" | "unwrapKey" | "verify" | "wrapKey";
+    [0m[36m     ~~~~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m18177[0m:[0m[33m6[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'KeyFormat'.
+type KeyFormat = "jwk" | "pkcs8" | "raw" | "spki";
+[0m[31m     ~~~~~~~~~[0m
+    at [0m[36masset:///lib.deno.crypto.d.ts[0m:[0m[33m38[0m:[0m[33m6[0m
+
+    'KeyFormat' was also declared here.
+    type KeyFormat = "jwk" | "pkcs8" | "raw" | "spki";
+    [0m[36m     ~~~~~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m18175[0m:[0m[33m6[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'NamedCurve'.
+type NamedCurve = string;
+[0m[31m     ~~~~~~~~~~[0m
+    at [0m[36masset:///lib.deno.crypto.d.ts[0m:[0m[33m40[0m:[0m[33m6[0m
+
+    'NamedCurve' was also declared here.
+    type NamedCurve = string;
+    [0m[36m     ~~~~~~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m18101[0m:[0m[33m6[0m
+
+[0m[1mTS2717 [0m[ERROR]: Subsequent property declarations must have the same type.  Property 'label' must be of type 'BufferSource | undefined', but here has type 'Uint8Array | undefined'.
+  label?: Uint8Array;
+[0m[31m  ~~~~~[0m
+    at [0m[36masset:///lib.deno.crypto.d.ts[0m:[0m[33m134[0m:[0m[33m3[0m
+
+    'label' was also declared here.
+        label?: BufferSource;
+    [0m[36m    ~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m1597[0m:[0m[33m5[0m
+
+[0m[1mTS6200 [0m[ERROR]: Definitions of the following identifiers conflict with those in another file: DOMException, Event, EventTarget, EventListenerOrEventListenerObject, ProgressEvent, AbortController, BlobPart, Blob, File, ReadableStreamReadResult, ReadableStreamReader, size, MessageEvent, Transferable, MessageChannel, MessagePort
+declare class DOMException extends Error {
+[0m[31m~~~~~~~[0m
+    at [0m[36masset:///lib.deno.web.d.ts[0m:[0m[33m9[0m:[0m[33m1[0m
+
+    Conflicts are in this file.
+    interface AddEventListenerOptions extends EventListenerOptions {
+    [0m[36m~~~~~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m26[0m:[0m[33m1[0m
+
+[0m[1mTS2687 [0m[ERROR]: All declarations of 'read' must have identical modifiers.
+  read: number;
+[0m[31m  ~~~~[0m
+    at [0m[36masset:///lib.deno.web.d.ts[0m:[0m[33m237[0m:[0m[33m3[0m
+
+[0m[1mTS2717 [0m[ERROR]: Subsequent property declarations must have the same type.  Property 'read' must be of type 'number | undefined', but here has type 'number'.
+  read: number;
+[0m[31m  ~~~~[0m
+    at [0m[36masset:///lib.deno.web.d.ts[0m:[0m[33m237[0m:[0m[33m3[0m
+
+    'read' was also declared here.
+        read?: number;
+    [0m[36m    ~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m1737[0m:[0m[33m5[0m
+
+[0m[1mTS2687 [0m[ERROR]: All declarations of 'written' must have identical modifiers.
+  written: number;
+[0m[31m  ~~~~~~~[0m
+    at [0m[36masset:///lib.deno.web.d.ts[0m:[0m[33m238[0m:[0m[33m3[0m
+
+[0m[1mTS2717 [0m[ERROR]: Subsequent property declarations must have the same type.  Property 'written' must be of type 'number | undefined', but here has type 'number'.
+  written: number;
+[0m[31m  ~~~~~~~[0m
+    at [0m[36masset:///lib.deno.web.d.ts[0m:[0m[33m238[0m:[0m[33m3[0m
+
+    'written' was also declared here.
+        written?: number;
+    [0m[36m    ~~~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m1738[0m:[0m[33m5[0m
+
+[0m[1mTS2403 [0m[ERROR]: Subsequent variable declarations must have the same type.  Variable 'AbortSignal' must be of type '{ new (): AbortSignal; prototype: AbortSignal; }', but here has type '{ new (): AbortSignal; prototype: AbortSignal; abort(reason?: any): AbortSignal; timeout(milliseconds: number): AbortSignal; }'.
+declare var AbortSignal: {
+[0m[31m            ~~~~~~~~~~~[0m
+    at [0m[36masset:///lib.deno.web.d.ts[0m:[0m[33m346[0m:[0m[33m13[0m
+
+    'AbortSignal' was also declared here.
+    declare var AbortSignal: {
+    [0m[36m            ~~~~~~~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m1997[0m:[0m[33m13[0m
+
+[0m[1mTS2428 [0m[ERROR]: All declarations of 'ReadableStreamReadDoneResult' must have identical type parameters.
+interface ReadableStreamReadDoneResult<T> {
+[0m[31m          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    at [0m[36masset:///lib.deno.web.d.ts[0m:[0m[33m469[0m:[0m[33m11[0m
+
+[0m[1mTS2717 [0m[ERROR]: Subsequent property declarations must have the same type.  Property 'value' must be of type 'undefined', but here has type 'T | undefined'.
+  value?: T;
+[0m[31m  ~~~~~[0m
+    at [0m[36masset:///lib.deno.web.d.ts[0m:[0m[33m471[0m:[0m[33m3[0m
+
+    'value' was also declared here.
+        value?: undefined;
+    [0m[36m    ~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m1511[0m:[0m[33m5[0m
+
+[0m[1mTS2403 [0m[ERROR]: Subsequent variable declarations must have the same type.  Variable 'ReadableStreamDefaultReader' must be of type '{ new <R = any>(stream: ReadableStream<R>): ReadableStreamDefaultReader<R>; prototype: ReadableStreamDefaultReader<any>; }', but here has type '{ new <R>(stream: ReadableStream<R>): ReadableStreamDefaultReader<R>; prototype: ReadableStreamDefaultReader<any>; }'.
+declare var ReadableStreamDefaultReader: {
+[0m[31m            ~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    at [0m[36masset:///lib.deno.web.d.ts[0m:[0m[33m528[0m:[0m[33m13[0m
+
+    'ReadableStreamDefaultReader' was also declared here.
+    declare var ReadableStreamDefaultReader: {
+    [0m[36m            ~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m11438[0m:[0m[33m13[0m
+
+[0m[1mTS2314 [0m[ERROR]: Generic type 'ReadableStreamReader' requires 1 type argument(s).
+  prototype: ReadableStreamReader;
+[0m[31m             ~~~~~~~~~~~~~~~~~~~~[0m
+    at [0m[36masset:///lib.deno.web.d.ts[0m:[0m[33m542[0m:[0m[33m14[0m
+
+[0m[1mTS2314 [0m[ERROR]: Generic type 'ReadableStreamReader' requires 1 type argument(s).
+  new (): ReadableStreamReader;
+[0m[31m          ~~~~~~~~~~~~~~~~~~~~[0m
+    at [0m[36masset:///lib.deno.web.d.ts[0m:[0m[33m543[0m:[0m[33m11[0m
+
+[0m[1mTS2717 [0m[ERROR]: Subsequent property declarations must have the same type.  Property 'abort' must be of type 'UnderlyingSinkAbortCallback | undefined', but here has type 'WritableStreamErrorCallback | undefined'.
+  abort?: WritableStreamErrorCallback;
+[0m[31m  ~~~~~[0m
+    at [0m[36masset:///lib.deno.web.d.ts[0m:[0m[33m562[0m:[0m[33m3[0m
+
+    'abort' was also declared here.
+        abort?: UnderlyingSinkAbortCallback;
+    [0m[36m    ~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m1796[0m:[0m[33m5[0m
+
+[0m[1mTS2717 [0m[ERROR]: Subsequent property declarations must have the same type.  Property 'start' must be of type 'UnderlyingSinkStartCallback | undefined', but here has type 'WritableStreamDefaultControllerStartCallback | undefined'.
+  start?: WritableStreamDefaultControllerStartCallback;
+[0m[31m  ~~~~~[0m
+    at [0m[36masset:///lib.deno.web.d.ts[0m:[0m[33m564[0m:[0m[33m3[0m
+
+    'start' was also declared here.
+        start?: UnderlyingSinkStartCallback;
+    [0m[36m    ~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m1798[0m:[0m[33m5[0m
+
+[0m[1mTS2717 [0m[ERROR]: Subsequent property declarations must have the same type.  Property 'cancel' must be of type 'UnderlyingSourceCancelCallback | undefined', but here has type 'ReadableStreamErrorCallback | undefined'.
+  cancel?: ReadableStreamErrorCallback;
+[0m[31m  ~~~~~~[0m
+    at [0m[36masset:///lib.deno.web.d.ts[0m:[0m[33m571[0m:[0m[33m3[0m
+
+    'cancel' was also declared here.
+        cancel?: UnderlyingSourceCancelCallback;
+    [0m[36m    ~~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m1804[0m:[0m[33m5[0m
+
+[0m[1mTS2717 [0m[ERROR]: Subsequent property declarations must have the same type.  Property 'start' must be of type 'UnderlyingSourceStartCallback<R> | undefined', but here has type 'ReadableStreamDefaultControllerCallback<R> | undefined'.
+  start?: ReadableStreamDefaultControllerCallback<R>;
+[0m[31m  ~~~~~[0m
+    at [0m[36masset:///lib.deno.web.d.ts[0m:[0m[33m573[0m:[0m[33m3[0m
+
+    'start' was also declared here.
+        start?: UnderlyingSourceStartCallback<R>;
+    [0m[36m    ~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m1806[0m:[0m[33m5[0m
+
+[0m[1mTS2687 [0m[ERROR]: All declarations of 'highWaterMark' must have identical modifiers.
+  highWaterMark: number;
+[0m[31m  ~~~~~~~~~~~~~[0m
+    at [0m[36masset:///lib.deno.web.d.ts[0m:[0m[33m641[0m:[0m[33m3[0m
+
+[0m[1mTS2687 [0m[ERROR]: All declarations of 'highWaterMark' must have identical modifiers.
+  highWaterMark: number;
+[0m[31m  ~~~~~~~~~~~~~[0m
+    at [0m[36masset:///lib.deno.web.d.ts[0m:[0m[33m653[0m:[0m[33m3[0m
+
+[0m[1mTS2403 [0m[ERROR]: Subsequent variable declarations must have the same type.  Variable 'ReadableStream' must be of type '{ new <R = any>(underlyingSource?: UnderlyingSource<R> | undefined, strategy?: QueuingStrategy<R> | undefined): ReadableStream<R>; prototype: ReadableStream<...>; }', but here has type '{ new (underlyingSource: UnderlyingByteSource, strategy?: { highWaterMark?: number | undefined; size?: undefined; } | undefined): ReadableStream<Uint8Array>; new <R = any>(underlyingSource?: UnderlyingSource<...> | undefined, strategy?: QueuingStrategy<...> | undefined): ReadableStream<...>; prototype: ReadableStrea...'.
+declare var ReadableStream: {
+[0m[31m            ~~~~~~~~~~~~~~[0m
+    at [0m[36masset:///lib.deno.web.d.ts[0m:[0m[33m686[0m:[0m[33m13[0m
+
+    'ReadableStream' was also declared here.
+    declare var ReadableStream: {
+    [0m[36m            ~~~~~~~~~~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m11395[0m:[0m[33m13[0m
+
+[0m[1mTS2687 [0m[ERROR]: All declarations of 'signal' must have identical modifiers.
+  signal: AbortSignal;
+[0m[31m  ~~~~~~[0m
+    at [0m[36masset:///lib.deno.web.d.ts[0m:[0m[33m752[0m:[0m[33m3[0m
+
+[0m[1mTS2403 [0m[ERROR]: Subsequent variable declarations must have the same type.  Variable 'WritableStreamDefaultController' must be of type '{ new (): WritableStreamDefaultController; prototype: WritableStreamDefaultController; }', but here has type 'WritableStreamDefaultController'.
+declare var WritableStreamDefaultController: WritableStreamDefaultController;
+[0m[31m            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    at [0m[36masset:///lib.deno.web.d.ts[0m:[0m[33m757[0m:[0m[33m13[0m
+
+    'WritableStreamDefaultController' was also declared here.
+    declare var WritableStreamDefaultController: {
+    [0m[36m            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m16811[0m:[0m[33m13[0m
+
+[0m[1mTS2717 [0m[ERROR]: Subsequent property declarations must have the same type.  Property 'closed' must be of type 'Promise<undefined>', but here has type 'Promise<void>'.
+  readonly closed: Promise<void>;
+[0m[31m           ~~~~~~[0m
+    at [0m[36masset:///lib.deno.web.d.ts[0m:[0m[33m767[0m:[0m[33m12[0m
+
+    'closed' was also declared here.
+        readonly closed: Promise<undefined>;
+    [0m[36m             ~~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m16818[0m:[0m[33m14[0m
+
+[0m[1mTS2717 [0m[ERROR]: Subsequent property declarations must have the same type.  Property 'ready' must be of type 'Promise<undefined>', but here has type 'Promise<void>'.
+  readonly ready: Promise<void>;
+[0m[31m           ~~~~~[0m
+    at [0m[36masset:///lib.deno.web.d.ts[0m:[0m[33m769[0m:[0m[33m12[0m
+
+    'ready' was also declared here.
+        readonly ready: Promise<undefined>;
+    [0m[36m             ~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m16820[0m:[0m[33m14[0m
+
+[0m[1mTS2403 [0m[ERROR]: Subsequent variable declarations must have the same type.  Variable 'WritableStreamDefaultWriter' must be of type '{ new <W = any>(stream: WritableStream<W>): WritableStreamDefaultWriter<W>; prototype: WritableStreamDefaultWriter<any>; }', but here has type '{ new (): WritableStreamDefaultWriter<any>; prototype: WritableStreamDefaultWriter<any>; }'.
+declare var WritableStreamDefaultWriter: {
+[0m[31m            ~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    at [0m[36masset:///lib.deno.web.d.ts[0m:[0m[33m777[0m:[0m[33m13[0m
+
+    'WritableStreamDefaultWriter' was also declared here.
+    declare var WritableStreamDefaultWriter: {
+    [0m[36m            ~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m16827[0m:[0m[33m13[0m
+
+[0m[1mTS2403 [0m[ERROR]: Subsequent variable declarations must have the same type.  Variable 'TransformStreamDefaultController' must be of type '{ new (): TransformStreamDefaultController<any>; prototype: TransformStreamDefaultController<any>; }', but here has type 'TransformStreamDefaultController<any>'.
+declare var TransformStreamDefaultController: TransformStreamDefaultController;
+[0m[31m            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+    at [0m[36masset:///lib.deno.web.d.ts[0m:[0m[33m807[0m:[0m[33m13[0m
+
+    'TransformStreamDefaultController' was also declared here.
+    declare var TransformStreamDefaultController: {
+    [0m[36m            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m14217[0m:[0m[33m13[0m
+
+[0m[1mTS2717 [0m[ERROR]: Subsequent property declarations must have the same type.  Property 'start' must be of type 'TransformerStartCallback<O> | undefined', but here has type 'TransformStreamDefaultControllerCallback<O> | undefined'.
+  start?: TransformStreamDefaultControllerCallback<O>;
+[0m[31m  ~~~~~[0m
+    at [0m[36masset:///lib.deno.web.d.ts[0m:[0m[33m813[0m:[0m[33m3[0m
+
+    'start' was also declared here.
+        start?: TransformerStartCallback<O>;
+    [0m[36m    ~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m1772[0m:[0m[33m5[0m
+
+[0m[1mTS6200 [0m[ERROR]: Definitions of the following identifiers conflict with those in another file: FormDataEntryValue, HeadersInit, Headers, RequestInfo, RequestCache, RequestCredentials, RequestMode, RequestRedirect, ReferrerPolicy, BodyInit, RequestDestination, Request, ResponseType, Response
+interface DomIterable<K, V> {
+[0m[31m~~~~~~~~~[0m
+    at [0m[36masset:///lib.deno.fetch.d.ts[0m:[0m[33m9[0m:[0m[33m1[0m
+
+    Conflicts are in this file.
+    interface AddEventListenerOptions extends EventListenerOptions {
+    [0m[36m~~~~~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m26[0m:[0m[33m1[0m
+
+[0m[1mTS2403 [0m[ERROR]: Subsequent variable declarations must have the same type.  Variable 'FormData' must be of type '{ new (form?: HTMLFormElement | undefined): FormData; prototype: FormData; }', but here has type '{ new (): FormData; prototype: FormData; }'.
+declare var FormData: {
+[0m[31m            ~~~~~~~~[0m
+    at [0m[36masset:///lib.deno.fetch.d.ts[0m:[0m[33m48[0m:[0m[33m13[0m
+
+    'FormData' was also declared here.
+    declare var FormData: {
+    [0m[36m            ~~~~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m5420[0m:[0m[33m13[0m
+
+[0m[1mTS2717 [0m[ERROR]: Subsequent property declarations must have the same type.  Property 'window' must be of type 'null | undefined', but here has type 'any'.
+  window?: any;
+[0m[31m  ~~~~~~[0m
+    at [0m[36masset:///lib.deno.fetch.d.ts[0m:[0m[33m271[0m:[0m[33m3[0m
+
+    'window' was also declared here.
+        window?: null;
+    [0m[36m    ~~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m1561[0m:[0m[33m5[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'CloseEvent'.
+declare class CloseEvent extends Event {
+[0m[31m              ~~~~~~~~~~[0m
+    at [0m[36masset:///lib.deno.websocket.d.ts[0m:[0m[33m16[0m:[0m[33m15[0m
+
+    'CloseEvent' was also declared here.
+    interface CloseEvent extends Event {
+    [0m[36m          ~~~~~~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m3639[0m:[0m[33m11[0m    and here.
+    declare var CloseEvent: {
+    [0m[36m            ~~~~~~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m3648[0m:[0m[33m13[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'WebSocket'.
+declare class WebSocket extends EventTarget {
+[0m[31m              ~~~~~~~~~[0m
+    at [0m[36masset:///lib.deno.websocket.d.ts[0m:[0m[33m50[0m:[0m[33m15[0m
+
+    'WebSocket' was also declared here.
+    interface WebSocket extends EventTarget {
+    [0m[36m          ~~~~~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m16470[0m:[0m[33m11[0m    and here.
+    declare var WebSocket: {
+    [0m[36m            ~~~~~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m16509[0m:[0m[33m13[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'BinaryType'.
+type BinaryType = "arraybuffer" | "blob";
+[0m[31m     ~~~~~~~~~~[0m
+    at [0m[36masset:///lib.deno.websocket.d.ts[0m:[0m[33m125[0m:[0m[33m6[0m
+
+    'BinaryType' was also declared here.
+    type BinaryType = "arraybuffer" | "blob";
+    [0m[36m     ~~~~~~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m18130[0m:[0m[33m6[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'URLSearchParams'.
+declare class URLSearchParams {
+[0m[31m              ~~~~~~~~~~~~~~~[0m
+    at [0m[36masset:///lib.deno.url.d.ts[0m:[0m[33m9[0m:[0m[33m15[0m
+
+    'URLSearchParams' was also declared here.
+    interface URLSearchParams {
+    [0m[36m          ~~~~~~~~~~~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m14297[0m:[0m[33m11[0m    and here.
+    declare var URLSearchParams: {
+    [0m[36m            ~~~~~~~~~~~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m14316[0m:[0m[33m13[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'URL'.
+declare class URL {
+[0m[31m              ~~~[0m
+    at [0m[36masset:///lib.deno.url.d.ts[0m:[0m[33m160[0m:[0m[33m15[0m
+
+    'URL' was also declared here.
+    interface URL {
+    [0m[36m          ~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m14270[0m:[0m[33m11[0m    and here.
+    declare var URL: {
+    [0m[36m            ~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m14287[0m:[0m[33m13[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'URLPatternInput'.
+declare type URLPatternInput = string | URLPatternInit;
+[0m[31m             ~~~~~~~~~~~~~~~[0m
+    at [0m[36masset:///lib.deno.url.d.ts[0m:[0m[33m195[0m:[0m[33m14[0m
+
+    'URLPatternInput' was also declared here.
+    declare type URLPatternInput = string | URLPatternInit;
+    [0m[36m             ~~~~~~~~~~~~~~~[0m
+        at [0m[36masset:///lib.dom.extras.d.ts[0m:[0m[33m22[0m:[0m[33m14[0m
+
+[0m[1mTS2300 [0m[ERROR]: Duplicate identifier 'URLPattern'.
+declare class URLPattern {
+[0m[31m              ~~~~~~~~~~[0m
+    at [0m[36masset:///lib.deno.url.d.ts[0m:[0m[33m259[0m:[0m[33m15[0m
+
+    'URLPattern' was also declared here.
+    declare class URLPattern {
+    [0m[36m              ~~~~~~~~~~[0m
+        at [0m[36masset:///lib.dom.extras.d.ts[0m:[0m[33m80[0m:[0m[33m15[0m
+
+[0m[1mTS2374 [0m[ERROR]: Duplicate index signature for type 'string'.
+  [name: string]: any;
+[0m[31m  ~~~~~~~~~~~~~~~~~~~~[0m
+    at [0m[36masset:///lib.deno.webstorage.d.ts[0m:[0m[33m41[0m:[0m[33m3[0m
+
+[0m[1mTS2403 [0m[ERROR]: Subsequent variable declarations must have the same type.  Variable 'Cache' must be of type '{ new (): Cache; prototype: Cache; }', but here has type '{ new (name: string): Cache; prototype: Cache; }'.
+declare var Cache: {
+[0m[31m            ~~~~~[0m
+    at [0m[36masset:///lib.deno.cache.d.ts[0m:[0m[33m56[0m:[0m[33m13[0m
+
+    'Cache' was also declared here.
+    declare var Cache: {
+    [0m[36m            ~~~~~[0m
+        at [0m[36masset:///lib.dom.d.ts[0m:[0m[33m3349[0m:[0m[33m13[0m
+
+Found 88 errors.
