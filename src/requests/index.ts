@@ -7,6 +7,7 @@ export type Link = {
 	height?: number;
 	width?: number;
 	preview?: LinkOrObject;
+	type?: string;
 };
 
 type ObjectEntry = Object | string;
@@ -94,3 +95,23 @@ export type Group = Actor & { type: "Group" };
 export type Organization = Actor & { type: "Organization" };
 export type Person = Actor & { type: "Person" };
 export type Service = Actor & { type: "Service" };
+
+export type WebFinger = {
+	subject: string;
+	aliases?: string[];
+	links: Link[];
+}
+
+export type ActorLdJson = Actor & {
+	preferredUsername: string;
+	inbox: LinkEntry;
+	outbox: LinkEntry;
+	followers: LinkEntry;
+	following: LinkEntry;
+	summary: string;
+	publicKey: {
+		id: LinkEntry;
+		owner: LinkEntry;
+		publicKeyPem: string;
+	}
+}

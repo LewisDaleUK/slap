@@ -1,6 +1,8 @@
 import { Database } from "../lib/Database.ts";
 import { Actor, ActorEntity } from "./models.ts";
 import { Maybe, IGateway } from "../types.d.ts";
+import { ActorLdJson, Object, WebFinger } from "../requests/index.ts";
+import { Key, KeyPair } from "../crypto/key.ts";
 
 export default class ActorGateway implements IGateway<Actor> {
 	private readonly _database: Database;
@@ -110,5 +112,40 @@ export default class ActorGateway implements IGateway<Actor> {
 	
 	delete(item: Actor): void {
 		this._database.query("DELETE FROM actor WHERE id = ?", [ item.id ]);
+	}
+
+	async get_external(handle: string, domain: string): Promise<Maybe<Actor>> {
+		const response = await fetch(`https://${domain}/.well-known/webfinger?resource=${handle}@${domain}`);
+		const body = await response.json() as WebFinger;
+
+		const selfLink = body.links.find(link => link.rel === "self");
+
+		if (selfLink) {
+			const ldJson = await (await fetch(selfLink.href, {
+				headers: {
+					"Content-Type": selfLink.type as string
+				}
+			})).json() as ActorLdJson;
+
+			const actor = await Actor.from({
+				handle,
+				domain,
+				external: true,
+				public_key_pem: ldJson.publicKey.publicKeyPem,
+				private_key_pem: null,
+				followers: ldJson.followers as string,
+				following: ldJson.following as string,
+				inbox: ldJson.inbox as string,
+				outbox: ldJson.outbox as string,
+				preferred_username: ldJson.preferredUsername,
+			});
+
+			const id = await this.save(actor);
+			actor.id = id as number;
+
+			return actor;
+		}
+
+		return null;
 	}
 }

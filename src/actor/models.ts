@@ -73,7 +73,7 @@ export class Actor {
 					preferred_username: this.preferred_username,
 					private_key_pem: await this.keys.privateKey?.toPem(),
 					public_key_pem: await this.keys.publicKey?.toPem(),
-					external: false,
+					external: this.external,
 					inbox: this.inbox || null,
 					outbox: this.outbox || null,
 					followers: this.followers || null,

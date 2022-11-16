@@ -1,13 +1,20 @@
 import { assertEquals, assertExists } from "../../testdeps.ts";
+import {
+	assertSpyCall,
+	assertSpyCalls,
+	returnsNext,
+	stub,
+  } from "https://deno.land/std@0.164.0/testing/mock.ts";
 import Database from "../../lib/Database.ts";
+import { Key, KeyPair } from "../../crypto/mod.ts";
 import ActorGateway from "../gateway.ts";
-import { Actor } from "../models.ts";
+import { Actor, ActorEntity } from "../models.ts";
 
 Deno.test("ActorGateway", async (t) => {
 	const database = new Database(":memory:");
 	const gateway = new ActorGateway(database);
 
-	await t.step("Create table", () => {
+	await t.step("Create tables", () => {
 		gateway.build();
 	});
 
@@ -67,6 +74,95 @@ Deno.test("ActorGateway", async (t) => {
 	await t.step("Delete an actor", async () => {
 		gateway.delete(await Actor.from({ ...await actor.entity(), id: actorId }));
 		assertEquals(await gateway.get(actorId), undefined);
+	});
+});
+
+Deno.test("Retrieving remote actors", async (t) => {
+	const database = new Database(':memory:');
+	const gateway = new ActorGateway(database);
+
+	await t.step("Build tables", () => {
+		gateway.build();
+	});
+
+	await t.step("Retrieve external actor for the first time", async () => {
+		const webfinger = {
+			subject: "testhandle@domain.com",
+			aliases: [
+				`https://domain.com/@testhandle`,
+				`https://domain.com/users/testhandle`,
+			],
+			links: [
+				{
+					rel: "http://webfinger.net/rel/profile-page",
+					type: "text/html",
+					href: `https://domain.com/@testhandle`
+				},
+				{
+					rel: "self",
+					type: "application/activity+json",
+					href: `https://domain.com/users/testhandle`
+				}
+			]
+		};
+		const ldJson = {
+			"@context": [
+			"https://www.w3.org/ns/activitystreams",
+			"https://w3id.org/security/v1"
+			],
+			"id": "https://domain.com/users/testhandle",
+			"type": "Person",
+			"preferredUsername": "testhandle",
+			"inbox": "https://domain.com/users/testhandle/inbox",
+			"outbox": "https://domain.com/users/testhandle/outbox",
+			"followers": "https://domain.com/users/testhandle/followers",
+			"following": "https://domain.com/users/testhandle/following",
+			"summary": "",
+			"name": "Test User",
+			"publicKey": {
+				"id": "https://domain.com/users/testhandle/#main-key",
+				"owner": "https://domain.com/users/testhandle",
+				"publicKeyPem": await (await KeyPair.generate()).publicKey?.toPem()
+			}
+		};
+		const fetchstub = stub(
+			window,
+			'fetch',
+			returnsNext([
+				new Promise(resolve => resolve(
+					new Response(JSON.stringify(webfinger))
+				)),
+				new Promise(resolve => resolve(new Response(JSON.stringify(ldJson)))),
+			])
+		);
+		const actor = await gateway.get_external("testhandle", "domain.com");
+		
+		assertSpyCall(fetchstub, 0, { args: ['https://domain.com/.well-known/webfinger?resource=testhandle@domain.com'] });
+		assertSpyCall(fetchstub, 1, {
+			args: [
+				'https://domain.com/users/testhandle',
+				{
+					headers: {
+						"Content-Type": "application/activity+json",
+					}
+				}
+			],
+		});
+
+		const expected = {
+			id: 1,
+			handle: "testhandle",
+			summary: "",
+			preferred_username: "testhandle",
+			public_key_pem: ldJson.publicKey.publicKeyPem,
+			external: true,
+			inbox: ldJson.inbox,
+			outbox: ldJson.outbox,
+			followers: ldJson.followers,
+			following: ldJson.following,
+			domain: "domain.com"
+		} as ActorEntity;
+		assertEquals(await actor?.entity(), expected);
 	});
 });
 

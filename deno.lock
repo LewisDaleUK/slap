@@ -27,6 +27,7 @@
     "https://deno.land/std@0.164.0/testing/_diff.ts": "a23e7fc2b4d8daa3e158fa06856bedf5334ce2a2831e8bf9e509717f455adb2c",
     "https://deno.land/std@0.164.0/testing/_format.ts": "cd11136e1797791045e639e9f0f4640d5b4166148796cad37e6ef75f7d7f3832",
     "https://deno.land/std@0.164.0/testing/asserts.ts": "1e340c589853e82e0807629ba31a43c84ebdcdeca910c4a9705715dfdb0f5ce8",
+    "https://deno.land/std@0.164.0/testing/mock.ts": "d7ad40139cda87476c4dc1efeffe406bbfb4a5f82b688e0b85bffe9e911526a2",
     "https://deno.land/x/sqlite@v3.7.0/build/sqlite.d.ts": "12908ced1670f96d5dc39aebb0d659630136fa6523881e4712cfb20b122dd324",
     "https://deno.land/x/sqlite@v3.7.0/build/sqlite.js": "cc55fef9cd124b2acb624899a5fad413834f4701bcfc21ac275844b822466292",
     "https://deno.land/x/sqlite@v3.7.0/build/vfs.js": "08533cc78fb29b9d9bd62f6bb93e5ef333407013fed185776808f11223ba0e70",
