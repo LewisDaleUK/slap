@@ -21,5 +21,4 @@ declare global {
 		site: Site.Model;
 		actor: Maybe<Actor.Model>;
 	}
-
 }

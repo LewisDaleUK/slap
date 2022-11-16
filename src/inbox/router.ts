@@ -1,35 +1,6 @@
 import { Activity } from "../requests/index.ts";
 import * as Crypto from "../crypto/mod.ts";
-
-type SignatureHeaders = {
-	keyId: string;
-	signature: string;
-	algorithm: string;
-	headers: string; 
-};
-
-const extractSignature = (signature: string): SignatureHeaders => {
-	return signature.split(',').reduce((values, current) => {
-		const [key, value] = current.split("=", 2);
-		const [_, text] = value.split('"', 2);
-		values[key] = text;
-
-		return values;
-	}, {} as { [k: string]: string }) as SignatureHeaders;
-}
-
-const expectedSignature = (headers: SignatureHeaders, req: Request) => 
-	headers.headers.split(' ').map(h => {
-		if (h === "(request-target)") {
-			return `(request-target): post /${req.actor?.handle}/inbox`;
-		}
-		return `${h}: ${req.headers.get(h)}`;
-	}).join('\n');
-
-const headersToSignature = (headers: { [k: string]: string }) =>
-	Object.entries(headers)
-		.map(([k, v]) => `${k.toLowerCase()}: ${v}`)
-		.join('\n');
+import * as Signature from "../message/utils/signature.ts";
 
 const verify = async (req: Request, activity: Activity): Promise<boolean> => {
 	const response = await fetch(activity.actor as string, {
@@ -40,8 +11,8 @@ const verify = async (req: Request, activity: Activity): Promise<boolean> => {
 	const body = await response.json();
 
 	const key = await Crypto.Key.fromPem(body.publicKey.publicKeyPem as string, "public");
-	const signature = extractSignature(req.headers.get("signature") as string);
-	const expected = expectedSignature(signature, req);
+	const signature = Signature.extractSignature(req.headers.get("signature") as string);
+	const expected = Signature.expectedSignature(signature, req);
 
 	return await key.verify(signature.signature, expected);
 }
@@ -76,7 +47,7 @@ const sendAcceptMessage = async (req: Request, activity: Activity): Promise<void
 		"content-type": "application/activity+json"
 	};
 
-	const signature = await req.actor?.keys.privateKey?.sign(headersToSignature(signatureHeaders));
+	const signature = await req.actor?.keys.privateKey?.sign(Signature.headersToSignature(signatureHeaders));
 	const header = `keyId="https://${req.site.domain}/${req.actor?.handle}",headers="(request-target) host date digest content-type",signature="${signature}"`;
 	const headers = {
 		Signature: header,
