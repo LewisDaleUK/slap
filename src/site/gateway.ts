@@ -1,4 +1,4 @@
-import { Maybe, IGateway } from "../types.ts";
+import { Maybe, IGateway } from "../types.d.ts";
 import { SiteDetails } from "./models.ts";
 import { Database } from "../lib/Database.ts";
 

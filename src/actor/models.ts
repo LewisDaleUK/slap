@@ -1,5 +1,5 @@
 import { Key, KeyPair } from "../crypto/mod.ts";
-import { Maybe } from "../types.ts";
+import { Maybe } from "../types.d.ts";
 
 export type ActorEntity = {
 	id?: number;

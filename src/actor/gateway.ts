@@ -1,6 +1,6 @@
 import { Database } from "../lib/Database.ts";
 import { Actor, ActorEntity } from "./models.ts";
-import { Maybe, IGateway } from "../types.ts";
+import { Maybe, IGateway } from "../types.d.ts";
 
 export default class ActorGateway implements IGateway<Actor> {
 	private readonly _database: Database;

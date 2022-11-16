@@ -1,7 +1,7 @@
 import * as Inbox from '../inbox/mod.ts';
 import ActorGateway from "./gateway.ts";
 import Profile from '../views/profile.tsx';
-import { Handler } from "../types.ts";
+import { Handler } from "../types.d.ts";
 import { Actor } from './models.ts';
 
 const actor: Handler = async (req, matches) : Promise<Response> => {

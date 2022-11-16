@@ -1,6 +1,6 @@
 import * as Actor from "../actor/mod.ts";
 import * as Site from "../site/mod.ts";
-import type { Handler } from "../types.ts";
+import type { Handler } from "../types.d.ts";
 
 export const handler: Handler = async (req, matches) => {
 	const resource = matches.search.groups.resource;
