@@ -115,6 +115,14 @@ export default class ActorGateway implements IGateway<Actor> {
 	}
 
 	async get_external(handle: string, domain: string): Promise<Maybe<Actor>> {
+		let actor = await this.map(
+			this._database.queryEntries<ActorEntity>(`SELECT * FROM actor WHERE handle = ? AND domain = ?`, [handle, domain])[0]
+		);
+
+		if (actor) {
+			return actor;
+		}
+
 		const response = await fetch(`https://${domain}/.well-known/webfinger?resource=${handle}@${domain}`);
 		const body = await response.json() as WebFinger;
 

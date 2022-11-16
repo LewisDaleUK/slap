@@ -84,47 +84,47 @@ Deno.test("Retrieving remote actors", async (t) => {
 	await t.step("Build tables", () => {
 		gateway.build();
 	});
-
-	await t.step("Retrieve external actor for the first time", async () => {
-		const webfinger = {
-			subject: "testhandle@domain.com",
-			aliases: [
-				`https://domain.com/@testhandle`,
-				`https://domain.com/users/testhandle`,
-			],
-			links: [
-				{
-					rel: "http://webfinger.net/rel/profile-page",
-					type: "text/html",
-					href: `https://domain.com/@testhandle`
-				},
-				{
-					rel: "self",
-					type: "application/activity+json",
-					href: `https://domain.com/users/testhandle`
-				}
-			]
-		};
-		const ldJson = {
-			"@context": [
-			"https://www.w3.org/ns/activitystreams",
-			"https://w3id.org/security/v1"
-			],
-			"id": "https://domain.com/users/testhandle",
-			"type": "Person",
-			"preferredUsername": "testhandle",
-			"inbox": "https://domain.com/users/testhandle/inbox",
-			"outbox": "https://domain.com/users/testhandle/outbox",
-			"followers": "https://domain.com/users/testhandle/followers",
-			"following": "https://domain.com/users/testhandle/following",
-			"summary": "",
-			"name": "Test User",
-			"publicKey": {
-				"id": "https://domain.com/users/testhandle/#main-key",
-				"owner": "https://domain.com/users/testhandle",
-				"publicKeyPem": await (await KeyPair.generate()).publicKey?.toPem()
+	const webfinger = {
+		subject: "testhandle@domain.com",
+		aliases: [
+			`https://domain.com/@testhandle`,
+			`https://domain.com/users/testhandle`,
+		],
+		links: [
+			{
+				rel: "http://webfinger.net/rel/profile-page",
+				type: "text/html",
+				href: `https://domain.com/@testhandle`
+			},
+			{
+				rel: "self",
+				type: "application/activity+json",
+				href: `https://domain.com/users/testhandle`
 			}
-		};
+		]
+	};
+	const ldJson = {
+		"@context": [
+		"https://www.w3.org/ns/activitystreams",
+		"https://w3id.org/security/v1"
+		],
+		"id": "https://domain.com/users/testhandle",
+		"type": "Person",
+		"preferredUsername": "testhandle",
+		"inbox": "https://domain.com/users/testhandle/inbox",
+		"outbox": "https://domain.com/users/testhandle/outbox",
+		"followers": "https://domain.com/users/testhandle/followers",
+		"following": "https://domain.com/users/testhandle/following",
+		"summary": "",
+		"name": "Test User",
+		"publicKey": {
+			"id": "https://domain.com/users/testhandle/#main-key",
+			"owner": "https://domain.com/users/testhandle",
+			"publicKeyPem": await (await KeyPair.generate()).publicKey?.toPem()
+		}
+	};
+	await t.step("Retrieve external actor for the first time", async () => {
+		
 		const fetchstub = stub(
 			window,
 			'fetch',
@@ -163,6 +163,31 @@ Deno.test("Retrieving remote actors", async (t) => {
 			domain: "domain.com"
 		} as ActorEntity;
 		assertEquals(await actor?.entity(), expected);
+		fetchstub.restore();
+	});
+
+	await t.step("Should fetch the actor from the database a second time", async () => {
+		const fetchstub = stub(window, 'fetch');
+		const actor = await gateway.get_external("testhandle", "domain.com");
+
+		assertSpyCalls(fetchstub, 0);
+
+		assertEquals(
+			await actor?.entity(),
+			{
+				id: 1,
+				handle: "testhandle",
+				summary: "",
+				preferred_username: "testhandle",
+				public_key_pem: ldJson.publicKey.publicKeyPem,
+				external: true,
+				inbox: ldJson.inbox,
+				outbox: ldJson.outbox,
+				followers: ldJson.followers,
+				following: ldJson.following,
+				domain: "domain.com",
+			} as ActorEntity
+		);
 	});
 });
 
